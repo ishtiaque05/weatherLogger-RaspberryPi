@@ -1,0 +1,2340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0072)http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html -->
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:b="http://www.google.com/2005/gml/b" xmlns:data="http://www.google.com/2005/gml/data" xmlns:expr="http://www.google.com/2005/gml/expr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/shares.json"></script><script id="LR1" type="text/javascript" async="" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/client.js"></script><script type="text/javascript" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/auth016.js"></script><script type="text/javascript" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/counter017.js"></script><link rel="stylesheet" type="text/css" href="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/counter014.css" media="all"><script type="text/javascript" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/widgets.js"></script><link rel="stylesheet" type="text/css" href="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/widget119.css" media="all">
+<script src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/cb=gapi.loaded_0" async=""></script><script id="facebook-jssdk" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/all.js"></script><script type="text/javascript" async="" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/ga.js"></script><script async="" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/cloudflare.min.js"></script><script type="text/javascript">
+//<![CDATA[
+try{if (!window.CloudFlare) {var CloudFlare=[{verbose:0,p:0,byc:0,owlid:"cf",bag2:1,mirage2:0,oracle:0,paths:{cloudflare:"/cdn-cgi/nexp/dok9v=02fcfa4f56/"},atok:"d781a6e9790b1f909522f8a6918b0615",petok:"1286182b7cecdc76bee71581b715f9d008cbb808-1396287894-1800",zone:"rpiblog.com",rocket:"0",apps:{"ga_key":{"ua":"UA-35477239-1","ga_bs":"2"}}}];var a=document.createElement("script"),b=document.getElementsByTagName("script")[0];a.async=!0;a.src="//ajax.cloudflare.com/cdn-cgi/nexp/dok9v=b064e16429/cloudflare.min.js";b.parentNode.insertBefore(a,b);}}catch(e){};
+//]]>
+</script>
+<link href="https://plus.google.com/105302155475824590671/posts" rel="author">
+
+<script type="text/javascript">(function() { var b=window,f="chrome",g="jstiming",k="tick";(function(){function d(a){this.t={};this.tick=function(a,d,c){var e=void 0!=c?c:(new Date).getTime();this.t[a]=[e,d];if(void 0==c)try{b.console.timeStamp("CSI/"+a)}catch(h){}};this[k]("start",null,a)}var a;b.performance&&(a=b.performance.timing);var n=a?new d(a.responseStart):new d;b.jstiming={Timer:d,load:n};if(a){var c=a.navigationStart,h=a.responseStart;0<c&&h>=c&&(b[g].srt=h-c)}if(a){var e=b[g].load;0<c&&h>=c&&(e[k]("_wtsrt",void 0,c),e[k]("wtsrt_","_wtsrt",h),e[k]("tbsd_","wtsrt_"))}try{a=null,
+b[f]&&b[f].csi&&(a=Math.floor(b[f].csi().pageT),e&&0<c&&(e[k]("_tbnd",void 0,b[f].csi().startE),e[k]("tbnd_","_tbnd",c))),null==a&&b.gtbExternal&&(a=b.gtbExternal.pageT()),null==a&&b.external&&(a=b.external.pageT,e&&0<c&&(e[k]("_tbnd",void 0,b.external.startE),e[k]("tbnd_","_tbnd",c))),a&&(b[g].pt=a)}catch(p){}})();b.tickAboveFold=function(d){var a=0;if(d.offsetParent){do a+=d.offsetTop;while(d=d.offsetParent)}d=a;750>=d&&b[g].load[k]("aft")};var l=!1;function m(){l||(l=!0,b[g].load[k]("firstScrollTime"))}b.addEventListener?b.addEventListener("scroll",m,!1):b.attachEvent("onscroll",m);
+ })();</script>
+<meta content="blogger" name="generator">
+<link href="http://www.rpiblog.com/favicon.ico" rel="icon" type="image/x-icon">
+<link href="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi.htm" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Raspberry Pi Blog - Atom" href="http://www.rpiblog.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Raspberry Pi Blog - RSS" href="http://www.rpiblog.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Raspberry Pi Blog - Atom" href="http://www.blogger.com/feeds/4643957133557038581/posts/default">
+
+<link rel="alternate" type="application/atom+xml" title="Raspberry Pi Blog - Atom" href="http://www.rpiblog.com/feeds/6456280256894438960/comments/default">
+<link href="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/DHT11+raspberry+pi.jpg" rel="image_src">
+<meta content="temperature and humidity sensor raspberry pi" name="description">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Raspberry Pi Blog: Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi</title>
+<meta content="temperature and humidity sensor raspberry pi" name="description">
+<link href="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/css" rel="stylesheet" type="text/css">
+<style type="text/css"></style><style type="text/css">.cf-hidden { display: none; } .cf-invisible { visibility: hidden; }</style><style type="text/css">.dp-cpp .datatypes { color: #2E8B57; font-weight: bold; }</style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_connect_bar_container div,.fb_connect_bar_container span,.fb_connect_bar_container a,.fb_connect_bar_container img,.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}.fb_connect_bar a:hover{color:#fff}.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}.fb_connect_bar div a,.fb_connect_bar span,.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fbpluginrecommendationsbarleft,.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}.fbpluginrecommendationsbarleft{left:10px}.fbpluginrecommendationsbarright{right:10px}</style></head><body data-twttr-rendered="true" style=""><iframe id="twttrHubFrameSecure" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" name="twttrHubFrameSecure" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/hub(1).htm" style="position: absolute; top: -9999em; width: 10px; height: 10px;"></iframe><iframe id="twttrHubFrame" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" name="twttrHubFrame" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/hub.htm" style="position: absolute; top: -9999em; width: 10px; height: 10px;"></iframe><div style="display:none;">
+<a href="http://www.alexa.com/siteinfo/www.rpiblog.com"><a href="http://www.alexa.com/data/details/main?url=http://www.rpiblog.com" class="AlexaSiteStatsWidget"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/s.gif" border="0" alt="Alexa Certified Traffic Ranking for www.rpiblog.com"></a><script type="text/javascript" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/a"></script></a>
+</div>
+    <link type="text/css" rel="stylesheet" href="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/3841957138-widget_css_bundle.css">
+<link type="text/css" rel="stylesheet" href="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/authorization.css">
+<style id="page-skin-1" type="text/css"><!--
+/*
+/* Reset & General Styling */
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+html { font-size: 100%; overflow-y: scroll; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+abbr[title] { border-bottom: 1px dotted; }
+b, strong { font-weight: bold; }
+blockquote { margin: 1em 40px; }
+dfn { font-style: italic; }
+hr { border: 0; border-top: 1px solid #ccc; display: block; margin: 1em 0; padding: 0; }
+ins { background: #ff9; color: #000; text-decoration: none; }
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+pre, code, kbd, samp { font-family: monospace, monospace; _font-family: 'courier new', monospace; font-size: 1em; }
+pre, code { white-space: pre; white-space: pre-wrap; word-wrap: break-word; }
+q { quotes: none; }
+q:before, q:after { content: ""; content: none; }
+small { font-size: 85%; }
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+ul, ol { margin: 0; padding: 0; list-style-position: inside; }
+ul ul, ol ol, ul ol, ol ul { margin: 0; }
+dd { margin: 0 0 0 40px; }
+img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
+svg:not(:root) { overflow: hidden; }
+figure, form { margin: 0; }
+fieldset { border: 0; margin: 0; padding: 0; }
+legend { border: 0; *margin-left: -7px; padding: 0; }
+label { cursor: pointer; }
+button, input, select, textarea { font-size: 100%; margin: 0; vertical-align: baseline; *vertical-align: middle; }
+button, input { line-height: normal; *overflow: visible; }
+table button, table input { *overflow: auto; }
+button, input[type=button], input[type=reset], input[type=submit] { cursor: pointer; -webkit-appearance: button; }
+input[type=checkbox], input[type=radio] { box-sizing: border-box; }
+input[type=search] { -webkit-appearance: textfield; -moz-box-sizing: content-box; -webkit-box-sizing: content-box; box-sizing: content-box; }
+input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; }
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+textarea { overflow: auto; vertical-align: top; resize: vertical; }
+input:valid, textarea:valid {  }
+input:invalid, textarea:invalid { background-color: #f0dddd; }
+table { border-collapse: collapse; border-spacing: 0; }
+th { text-align: left; }
+tr, th, td { padding-right: 1.625em; border-bottom: 1px solid #EAE7DE; }
+td { vertical-align: top; }
+/* Smart clearfix */
+.clear, .cleaner { clear: both; height: 0; overflow: hidden; }
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+/* Headings */
+h1,h2,h3,h4,h5,h6 { margin:0; padding:0;  }
+h1 { font-size: 26px; }
+h2 { font-size: 22px; }
+h3 { font-size: 20px; }
+h4 { font-size: 16px; }
+h5 { font-size: 14px; }
+h6 { font-size: 12px; }
+.floatleft { float: left; }
+.floatright { float: right; }
+/* Text Selection Color */
+::-moz-selection { background: #05C; color: #fff; text-shadow: none; }
+::selection      { background: #05C; color: #fff; text-shadow: none; }
+img::-moz-selection { background: transparent; }
+img::selection      { background: transparent; }
+/* Navigation */
+div.navigation {
+border-top: 1px solid #E5E5E5;
+clear: both;
+font-size: 12px;
+margin: 0 0 10px;
+padding-bottom: 15px;
+text-align: center;
+text-transform: uppercase;
+width: 700px;
+}
+div.navigation a { font-weight: normal; padding:0 10px; line-height: 50px; }
+div.navigation span.current { padding: 0 10px; color:#ea6c35; font-weight:bold;  }
+div.navigation span.pages { margin-right: 10px; display: none; }
+div.navigation .alignleft, div.navigation .alignright { margin: 0; }
+div.navigation .prev { float:left; }
+div.navigation .next { float:right; }
+/* Forms */
+input, textarea {  font-size: 13px; padding: 7px 6px; border: 1px solid #D9D6D6;  color: #000; background: #fff;  font-family: "Lato", "Myriad Pro", "Arial", sans-serif; }
+input:focus, textarea:focus { border-color: #999;  }
+button,
+input[type=button],
+input[type=reset],
+input[type=submit] {  background: #848484; padding:8px 10px; border: none 0; color: #fff;   }
+button:hover,
+input[type=button]:hover,
+input[type=reset]:hover,
+input[type=submit]:hover { background: #222;  cursor: pointer; -webkit-transition-duration: 0.2s; -moz-transition-duration: 0.2s; transition-duration: 0.2s; }
+input#s { float:left; margin:0 5px 0 0; }
+/* Meta separator */
+.separator {
+color: #e5e5e5;
+font-size: 11px;
+margin:0;
+}
+/*********************************************************************************************
+2. Global Styles
+*********************************************************************************************/
+body {
+color: #444;
+font-family: "Lato", "Myriad Pro", "Arial", sans-serif;
+font-size: 14px;
+overflow-x: hidden;
+line-height: 1.5;
+margin: 0;
+padding: 0;
+background: url('https://lh5.googleusercontent.com/-jWEJdGE8mZw/UQvbV-UarMI/AAAAAAAAAig/5J_zGCkK7Pw/s640/background.jpg') no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+/* Links */
+a { color: #191919; text-decoration:none; }
+a:hover { text-decoration:none; color:#ea6c35}
+a:focus { outline: none; }
+a:hover, a:active { outline: none; }
+p { margin: 0 0 15px; padding: 0; }
+.inner-wrap {
+margin: 0 auto;
+width: 980px;
+background:#fff;
+padding:0 40px;
+}
+/*********************************************************************************************
+3. Header  -------------------------  header.php
+*********************************************************************************************/
+#navbar {
+border-bottom: 1px solid #e5e5e5;
+border-top: 3px solid #e5e5e5;
+}
+#navbarsecond {
+margin-bottom: 25px;
+border-top: 1px solid #e5e5e5;
+border-bottom: 3px solid #191919;
+}
+#logo {
+text-align:center;
+padding:40px 0;
+}
+#logo a {
+font-size: 66px;
+font-weight: bold;
+display: block;
+line-height:1.2;
+}
+#logo span {
+color:#848484;
+font-size:14px;
+display:block;
+text-align:center;
+font-weight:normal;
+}
+.adv {
+float:right;
+margin: 0 0 15px;
+}
+/* Header Social Icons */
+#navsocial {float: right; display: inline; margin-top: 13px; font-size: 12px; }
+#navsocial li {float: left; display: inline; margin-left: 13px; line-height: 20px; }
+#navsocial li a { color:#848484; }
+#navsocial li a:hover { color:#ea6c35; }
+#navsocial img { float: left; display: inline; margin-right: 3px; }
+/* Dropdown menu */
+.dropdown, .dropdown * { margin: 0; padding: 0; list-style: none; }
+.dropdown { line-height: 1.0; }
+.dropdown ul { position: absolute; top: -999em; width: 170px; /* left offset of submenus need to match (see below) */ }
+.dropdown ul li { width: 100%; }
+.dropdown li:hover { visibility: inherit; /* fixes IE7 'sticky bug' */ }
+.dropdown li { float:left; display:inline;  position: relative; }
+.dropdown a {  position: relative; }
+.dropdown li:hover ul,
+.dropdown li.sfHover ul { left: 0; top:43px; /* match top ul list item height */ z-index: 99; }
+ul.dropdown li:hover li ul,
+ul.dropdown li.sfHover li ul { top: -999em; }
+ul.dropdown li li:hover ul,
+ul.dropdown li li.sfHover ul { left: 170px; /* match ul width */ top: 0; }
+ul.dropdown li li:hover li ul,
+ul.dropdown li li.sfHover li ul { top: -999em; }
+ul.dropdown li li li:hover ul,
+ul.dropdown li li li.sfHover ul { left: 170px; /* match ul width */ top: 0; }
+#navbarsecond .dropdown ul { position: absolute; top: -999em; width: 170px; /* left offset of submenus need to match (see below) */ }
+#navbarsecond .dropdown li:hover ul,
+#navbarsecond .dropdown li.sfHover ul { left: 0; top:47px; /* match top ul list item height */ z-index: 99; }
+#navbarsecond ul.dropdown li:hover li ul,
+#navbarsecond ul.dropdown li.sfHover li ul { top: -999em; }
+#navbarsecond ul.dropdown li li:hover ul,
+#navbarsecond ul.dropdown li li.sfHover ul { left: 170px; /* match ul width */ top: -10px; }
+#navbarsecond ul.dropdown li li:hover li ul,
+#navbarsecond ul.dropdown li li.sfHover li ul { top: -999em; }
+#navbarsecond ul.dropdown li li li:hover ul,
+#navbarsecond ul.dropdown li li li.sfHover ul { left: 170px; /* match ul width */ top: -10px; }
+.dropdown {
+float:left;
+}
+.dropdown a {
+padding: 12px 10px 15px;
+margin:0 5px 0 0;
+text-decoration:none;
+line-height:1.2;
+font-size: 14px;
+color: #848484;
+display:block;
+}
+.dropdown a:hover {
+background:#ededed;
+color:#ea6c35;
+}
+.dropdown ul {
+text-align: left;
+margin: 0;
+background:#ededed;
+border-top:none;
+z-index:999;
+padding:10px 0 10px;
+}
+#navbar .dropdown ul ul {
+top:-10px;
+padding:10px 0 10px;
+}
+.dropdown .current_page_item a,
+.dropdown .current-cat a,
+.dropdown .current-menu-item a,
+.dropdown .current_page_item a,
+.dropdown .current-cat a,
+.dropdown .current-menu-item a {
+outline:0;
+color: #848484;
+font-weight:bold;
+}
+.dropdown .current_page_item ul a,
+.dropdown .current-cat ul a,
+.dropdown .current-menu-item ul a,
+.dropdown .current_page_item ul a,
+.dropdown .current-cat ul a,
+.dropdown .current-menu-item ul a {
+outline:0;
+font-weight:normal;
+color:#c0c0c0;
+}
+.dropdown li ul li {
+float:left;
+margin:0;
+padding:0;
+}
+.dropdown li ul li a {
+color:#ea6c35;
+margin:0;
+padding:3px 10px;
+}
+.dropdown li:hover a {
+color:#ea6c35;
+background:#ededed;
+}
+.dropdown li:hover ul a {
+color:#848484;
+}
+.dropdown li:hover li a:hover {
+color:#ea6c35;
+}
+.dropdown a.sf-with-ul {
+min-width:1px;
+}
+.sf-sub-indicator {
+display:block;
+margin:0;
+height:10px;
+width:100%;
+float:left;
+text-indent:-999em;
+overflow:hidden;
+background:url('http://1.bp.blogspot.com/-6GgrJ1W8PTc/UGge0oI9URI/AAAAAAAABWQ/vKw0B6A-3Ec/downt.png') no-repeat center;
+}
+.dropdown li:hover li .sf-sub-indicator {  /* give all except IE6 the correct values */
+background:url('http://4.bp.blogspot.com/-j02qJiTwkZA/UGge2mhbLZI/AAAAAAAABWo/bIRQBVtcmI4/rightt.png') no-repeat right; /* 8-bit indexed alpha png. IE6 gets solid image only */
+width:10px;
+float:right;
+margin:5px 0 0 5px;
+}
+#navbarsecond .sf-sub-indicator {
+display:block;
+margin:0;
+height:10px;
+width:100%;
+float:left;
+text-indent:-999em;
+overflow:hidden;
+background:url('http://3.bp.blogspot.com/-aoUKDwhvsLg/UGgezjTLXHI/AAAAAAAABWA/IZ4v2fbi7Yo/down.png') no-repeat center;
+}
+#navbarsecond .dropdown li:hover .sf-sub-indicator {
+background:url('http://4.bp.blogspot.com/-Lbc304aBmM4/UGge0LgrLtI/AAAAAAAABWI/sqb2WFOGVYw/downh.png') no-repeat center;
+}
+#navbarsecond .dropdown li:hover li .sf-sub-indicator {  /* give all except IE6 the correct values */
+background:url('http://4.bp.blogspot.com/-wfkEqNuGEYM/UGge17gIaBI/AAAAAAAABWg/Z2nFYzO4Pho/right.png') no-repeat right; /* 8-bit indexed alpha png. IE6 gets solid image only */
+width:10px;
+float:right;
+margin:5px 0 0 5px;
+}
+#navbarsecond .dropdown a {
+color: #000;
+font-size:16px;
+padding:14px 10px;
+line-height:1.2;
+}
+#navbarsecond .dropdown a:hover {
+background: #242423;
+color:#fff;
+}
+#navbarsecond .dropdown ul {
+background: #242423;
+padding:10px 0 10px;
+}
+#navbarsecond .dropdown ul ul {
+top:-10px;
+padding:10px 0 10px;
+background: #242423;
+}
+#navbarsecond .dropdown li ul li {
+color:#000;
+}
+#navbarsecond .dropdown li ul li a {
+color:#000;
+padding:4px 10px;
+}
+#navbarsecond .dropdown li:hover a {
+color:#fff;
+background: #242423;
+}
+#navbarsecond .dropdown li:hover ul a {
+color:#fff;
+}
+#navbarsecond .dropdown li:hover li a:hover {
+color:#ea6c35;
+}
+/*********************************************************************************************
+4. Homepage    -------------------------  index.php
+*********************************************************************************************/
+#content {
+float: left;
+width: 700px;
+}
+/* Featured Slider -- wpzoom-slider.php */
+#slider { margin: 0 0 25px; position: relative; width: 100%; padding: 0;  }
+#slider .navi { width: 75px; height: 36px; position: absolute; right: 15px; top: 15px; }
+#slider .navi a { display: block; text-indent: -2999px; background: url(http://2.bp.blogspot.com/-OWNDhfvjMQ0/UGgey9gOZdI/AAAAAAAABV4/8BvMLlJAn-k/arrows_big.png) no-repeat; cursor: pointer; height: 36px; width: 36px; }
+#slider .navi a.backward { float: left; background-position: 0 0; }
+#slider .navi a.backward:hover { background-position: 0 -40px; }
+#slider .navi a.forward { float: right; background-position: -41px 0; }
+#slider .navi a.forward:hover { float: right; background-position: -41px -40px; }
+#slider #slides { width: 100%; display: block; overflow: hidden; float: left; padding:0;  }
+#slider .notice { color: #999; }
+#slider #slides .slide_content { padding:30px 25px; overflow: hidden; font-size: 16px; color: #fff; position:absolute; background:url(http://2.bp.blogspot.com/-Sh8OYdPdMEM/UGgeye5QHKI/AAAAAAAABVw/iGFyMgBvv1A/75.png) repeat; bottom:30px; left:30px; width:550px; }
+#slider #slides .slide_content p { margin-bottom: 5px; }
+#slider #slides h2 { line-height: 1.3; margin: 0 0 7px; }
+#slider #slides h2 a { color: #fff; font-size: 36px; font-weight: bold; }
+#slider #slides .slides li { list-style-type: none; display:none; }
+#slider #slides h3 { text-transform:uppercase; font-size:16px;  }
+#slider #slides h3 a { color:#fff; }
+#slider_nav { display:none; }
+#slider #slides.small-size .slide_content { padding:20px 15px; overflow: hidden; font-size: 14px; color: #fff; position:absolute; background:url(http://2.bp.blogspot.com/-Sh8OYdPdMEM/UGgeye5QHKI/AAAAAAAABVw/iGFyMgBvv1A/75.png) repeat; bottom:20px; left:20px; width:450px; }
+#slider #slides.small-size h2 a { color: #fff; font-size: 26px; font-weight: bold; }
+#slider #slides.small-size h3 { text-transform:uppercase; font-size:12px;  }
+/* Featured Category Widgets on Homepage */
+.home_widgets .home_column {
+width:310px;
+margin:0 25px 0 0;
+float:left;
+}
+.home_widgets .home_column.last {
+margin:0;
+}
+.home_widgets .home_column h4.title {
+border-top: 1px solid #E5E5E5;
+font-size: 13px;
+line-height: 1.3;
+margin: 0 0 10px 0;
+padding:10px 0 0;
+text-transform:uppercase;
+color: #212121;
+font-weight:normal;
+}
+.featured-post {
+margin:0 0 20px;
+}
+.home_column h3 {
+margin:0 0 8px;
+}
+.home_column h3 a {
+font-size:21px;
+}
+.home_column .post-thumb {
+margin:0 0 10px;
+}
+/*********************************************************************************************
+5. Archive posts styling -------------------------  loop.php
+*********************************************************************************************/
+h1.archive_title {
+border-bottom: 1px solid #E5E5E5;
+color: #000000;
+font-size: 36px;
+line-height: 1.1;
+padding: 0 0 15px;
+text-transform: uppercase;
+width: 700px;
+}
+.archiveposts h3.title {
+border-bottom: 1px solid #E5E5E5;
+font-size: 14px;
+line-height: 1.3;
+margin: 0;
+padding:8px 0;
+text-transform:uppercase;
+color: #666;
+font-weight:normal;
+width:700px;
+}
+/* Grid view */
+.recent-post {
+border-top: 1px solid #E5E5E5;
+float: left;
+height: 450px;
+margin: -1px 25px 20px 0;
+padding-top: 15px;
+width: 216px;
+}
+.archive .recent-post, .search .recent-post { margin-top:-16px; }
+.recent-post.last {
+margin-right:0;
+}
+.recent-post .post-thumb {
+margin: 0 0 10px;
+position:relative;
+}
+.recent-post h4.title {
+font-size: 13px;
+line-height: 1.3;
+margin: 0 0 10px 0;
+padding:0 0 0;
+text-transform:uppercase;
+color: #212121;
+font-weight:normal;
+}
+.recent-post h2 {
+line-height: 1;
+margin-bottom:10px;
+font-weight:bold;
+}
+.recent-post h2 a {
+font-size: 16px;
+}
+.recent-post .post-content {
+padding: 0;
+overflow: hidden;
+}
+.recent-post .entry p {
+font-size:14px;
+}
+.entry img {max-width:570px;}
+.recent-meta {
+margin:0 0 5px;
+font-size:11px;
+color:#A8A8A8;
+}
+.recent-meta a {
+color:#A8A8A8;
+}
+.recent-meta a:hover {
+color:#ea6c35;
+}
+.recent-meta span {
+margin-right:4px;
+}
+/* List view */
+.list-view .recent-post {
+width:100%;
+margin:-1px 0 25px 0;
+border-top: 1px solid #E5E5E5;
+}
+.archive .list-view .recent-post {
+margin-top:-16px;
+}
+.list-view .recent-post .post-thumb {
+float:left;
+margin:0 15px 0 0;
+}
+/* Read more button */
+a.more-link {  margin:5px 0 0;  text-align:left; font-weight:bold; }
+/*********************************************************************************************
+6. Single Posts Styling  ---------------------------------  single.php, page.php
+*********************************************************************************************/
+.col_main {
+width:570px;
+float:left;
+}
+.col_meta {
+float: right;
+width: 110px;
+}
+.category_link { text-transform:uppercase; font-size:16px; }
+.entry h1, .entry h2, .entry h3, .entry h4, .entry h5, .entry h6 {
+margin-bottom: 12px;
+line-height:1.3;
+}
+.entry p { margin-bottom: 14px; }
+.entry img.alignnone,
+.entry img.aligncenter,
+.entry img.alignleft,
+.entry img.alignright,
+.entry img.attachment-fullsize {
+margin-bottom: 10px;
+max-width: 570px;
+width:auto;
+height:auto;
+}
+.full-width .entry img.alignnone,
+.full-width .entry img.aligncenter,
+.full-width .entry img.alignleft,
+.full-width .entry img.alignright,
+.full-width .entry img.attachment-fullsize {
+margin-bottom: 10px;
+max-width: 846px;
+width:auto;
+height:auto;
+}
+.entry ul, .entry ol { margin: 0 0 14px 14px; }
+.entry li ul, .entry li ol { margin-bottom: 0; }
+.entry li { list-style-position: inside; }
+.entry ul li { list-style-type: square; }
+.entry ol li { list-style-type: decimal; }
+.entry blockquote {
+color:#8E8E8E;
+border-left: solid 3px #ececec;
+padding:0 15px;
+margin: 10px;
+}
+h1.title  {
+margin:0 0 10px;
+line-height:1.3;
+font-size:32px;
+font-weight:bold;
+}
+h1.title a {
+color:#222;
+}
+.post-meta { margin: 0 0 15px; padding: 0 0 13px; color: #656565; border-bottom: 1px solid #e5e5e5; }
+.col_meta h3 { border-top: 1px solid #E5E5E5; font-size: 14px; line-height: 1.3; margin: 0; padding: 10px 0; text-transform: uppercase; color: #666; font-weight: normal; }
+.prevnext { margin: 0 0 11px; padding: 5px 0 0; color: #656565; font-size: 12px; font-weight: bold; }
+.prevnext .next_link { float: right; }
+.prevnext .separator { margin-left:4px; }
+/* Related Posts */
+.related_posts {   margin: 15px 0; }
+.related_posts ul li { list-style-type: none; padding: 0 0 10px; margin: 0 0 10px; display: block; font-size: 11px; }
+.related_posts ul li a { font-weight:bold; display:block; font-size:14px; }
+/* Sharing buttons */
+.share_box .share_btn { margin:0 0 10px; }
+/* Tags */
+.tag_list {  margin:0 0 12px; color:#63676A; }
+.tag_list a {font-weight:bold; }
+.tags_wrap { overflow:hidden; }
+/* [gallery] shortcode */
+.entry .gallery .gallery-item { max-width:150px; display: -moz-inline-stack; display: inline-block; vertical-align: top; zoom: 1; *display: inline; margin: 10px; }
+.entry .gallery { clear: both; margin: auto; text-align: center; }
+.entry .gallery a:hover { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";filter: alpha(opacity=90); opacity: 0.6; transition: opacity .25s ease-in-out; -moz-transition: opacity .25s ease-in-out; -webkit-transition: opacity .25s ease-in-out;}
+/* Images align */
+.entry .aligncenter, div.aligncenter { display: block; clear:both; margin-left: auto; margin-right: auto; }
+.alignleft, .entry .alignleft { float: left; margin-right:15px; }
+.alignright, .entry .alignright { float: right; margin-left:15px; }
+/* Caption for images */
+.entry .wp-caption { max-width: 100% !important; width:auto; text-align:center; }
+.entry .wp-caption img { background:none; margin:0; border:0 none; max-width:100%; width:auto; height:auto;}
+.entry .wp-caption-text, .gallery-caption { color:#A7A3A3; font-size:11px; margin:0; padding:4px 0 0; text-align:center; }
+.entry .wp-caption.aligncenter { margin:0 auto 15px; }
+img.wp-smiley { border: none; padding: 0; }
+.thumbnails { clear: both; float: left; font-size: 11px; line-height: 1.6em;  }
+.thumbnails img { height: 100px; margin:0 20px 15px 0; width: 100px; }
+.thumbnails .active img { border:3px solid #FFCB65; }
+/* Template: Sidebar on the left */
+.side-left #content { float: right; border-right: 0; }
+.side-left #sidebar { float: left; }
+/* Template: Full-width */
+.full-width #content { width: 980px; }
+.full-width .col_main { width:846px; }
+.full-width h1.archive_title { width:980px; }
+.full-width .entry, .page .entry { float: none; display: block; padding-right: 0; }
+.full-width .entry img { max-width: 846px; }
+/* Template: Archives */
+.post .col_arch { float: left; width: 100%; margin: 10px 0; border-bottom: 1px solid #ececec; padding-bottom: 15px; }
+.post .col_arch .left { display:block; text-transform: uppercase; font-size:12px; font-weight:bold; }
+.post .col_arch .right { float: left; margin-top:12px; }
+.post .col_arch .right ul {margin-left:0; }
+.post .col_arch .right ul li a { font-weight: normal; }
+.post .col_arch .right ul li { width: 30%; float: left; margin: 0 10px 5px 0; list-style-type: none; }
+.post .col_arch:last-child { border-bottom:none; }
+/*********************************************************************************************
+7. Sidebar & Widgets -------------------------  sidebar.php
+*********************************************************************************************/
+#sidebar {
+float: right;
+width: 260px;
+font-size:13px;
+color:#5C5C5C;
+}
+.archive #sidebar, .page #sidebar, .search #sidebar {
+margin-top:20px;
+}
+#sidebar .widget {
+margin-bottom:20px;
+}
+.widget h2 {
+border-bottom: 1px solid #E5E5E5;
+font-size: 14px;
+line-height: 1.3;
+margin: 0 0 15px 0;
+padding:8px 0;
+text-transform:uppercase;
+color: #666;
+font-weight:normal;
+}
+.home_column .widget h3.title {
+border-top: 1px solid #E5E5E5;
+border-bottom:none;
+font-size: 13px;
+line-height: 1.3;
+margin: 0 0 10px 0;
+padding:10px 0 0;
+text-transform:uppercase;
+color: #212121;
+font-weight:normal;
+}
+.widget { float: left; line-height: 1.5; width: 100%; }
+.widget ul { clear: both; margin: 5px 0; line-height: 1.7; }
+.widget ul li { list-style-type: none; }
+.widget ul ul { margin: 0; padding: 0; border-top: none; }
+.widget ul ul li { border: none; }
+.widget #cat, .widget select { width: 100%; background: #F7F7F7; border: 1px solid #cdcfd4; color: #333333; display: inline; padding: 5px; line-height: 1.5; clear: both; float: left; }
+.side_ad { text-align: center; margin:25px 0 10px; }
+/* Category Widget */
+.widget_categories ul li { color: #8B8A8A; text-align: right; font-weight: normal; padding: 2px 0; clear: both; }
+.widget_categories ul li li { padding-left:10px; }
+.widget_categories ul li a { text-align: left; float: left; }
+/* Video Widget */
+.wpzoom_media .open .description { margin: 10px 0 5px; font-size: 12px; line-height: 16px; }
+.wpzoom_media .hide { display: none; }
+.wpzoom_media ul { text-align:center; }
+.wpzoom_media li { text-align:center; display:inline;  list-style-type: none; font-size: 14px; padding: 8px 2px; line-height: 20px; }
+.wpzoom_media li a { color:#ccc; font-weight: bold;}
+.wpzoom_media li a.active { color:#ea6c35; }
+/* Recent Comments */
+.recent-comments-list .avatar { margin-right: 8px; float: left;}
+.recent-comments-list li { padding: 6px 0 10px; margin:0 0 5px; border-bottom: 1px solid #eee; line-height:1.4; }
+.recent-comments-list li a { font-weight:bold; }
+/* Recent Posts  */
+.widget .feature-posts-list br {display: none;}
+.widget .feature-posts-list img { margin: 4px 12px 5px 0; float: left;}
+.widget .feature-posts-list small { font-size: 12px; color: #8B96A0; margin: 2px 0 4px; display: block; }
+.widget .feature-posts-list .post-excerpt { display: block;}
+.widget .feature-posts-list li { padding: 6px 0; margin:0; border-bottom:1px solid #ececec; line-height:1.4; }
+.widget .feature-posts-list li a { font-weight:bold; }
+/* Flickr widget */
+.widget .flickr_badge_image {margin-right: 10px; margin-bottom: 12px; float: left; }
+.widget .flickr_badge_image img { width: 64px; height: 64px; }
+.widget .flickr_badge_image img:hover { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";filter: alpha(opacity=60); opacity: 0.6; transition: opacity .25s ease-in-out; -moz-transition: opacity .25s ease-in-out; -webkit-transition: opacity .25s ease-in-out;}
+/* Popular Posts Widget */
+.popular-news .comments {  color: #A9A9A9; }
+.popular-news li {  padding: 0 0 6px; }
+/* Archive widget */
+.widget_archive li { width:49%; float:left; display:block; margin:0;  padding:0 0 6px;}
+/*********************************************************************************************
+8. Comments  -------------------------  comments.php
+*********************************************************************************************/
+#comments { clear: both; }
+#comments h3 { border-top: 1px solid #E5E5E5; font-size: 14px; line-height: 1.3; margin: 0; padding: 10px 0; text-transform: uppercase; color: #666; font-weight: normal; }
+#comments .navigation { padding: 0 0 18px 0; }
+.commentlist { list-style: none; margin: 0; }
+.commentlist li.comment { border-bottom: 1px solid #dedede; font-size:12px; line-height: 1.7; margin: 0 0 24px 0; padding: 0 0 0 76px; position: relative; }
+.commentlist li:last-child { border-bottom: none; margin-bottom: 0; }
+#comments .comment-body ul, #comments .comment-body ol { margin-bottom: 18px; }
+#comments .comment-body p:last-child { margin-bottom: 6px; }
+#comments .comment-body blockquote p:last-child { margin-bottom: 24px; }
+.commentlist ol { list-style: decimal; }
+.commentlist .avatar { position: absolute; top: 4px; left: 0; }
+.comment-author { margin-bottom:3px; }
+.comment-author cite { color: #B1B1B1; font-weight: bold; font-style:normal; font-size:14px; }
+.comment-author .says {  display:none; }
+.comment-meta { font-size: 12px;  margin: 0; float: right; }
+.comment-meta a:link, .comment-meta a:visited { color: #888; text-decoration: none; }
+.comment-meta a:active, .comment-meta a:hover { color: #333; }
+.reply { font-size: 12px; padding: 0 0 24px 0; }
+.commentlist .children { list-style: none; margin: 0; }
+.commentlist .children li { border: none; margin: 0; }
+.nopassword, .nocomments { display: none; }
+#comments .pingback { border-bottom: 1px solid #dedede; margin-bottom: 18px; padding-bottom: 18px; }
+.commentlist li.comment+li.pingback { margin-top: -6px; }
+#comments .pingback p { color: #888; display: block; font-size: 12px; line-height: 18px; margin: 0; }
+#comments .pingback .url { font-size: 13px; font-style: italic; }
+.comment-notes { display:none; }
+/* Comments form */
+#respond { margin: 24px 0; overflow: hidden; position: relative; }
+#respond p { margin: 0; }
+#respond .comment-notes { margin-bottom: 1em; }
+.form-allowed-tags { line-height: 1em; }
+.children #respond { margin: 0 48px 0 0; }
+.commentlist #respond { clear: both; display: block; }
+#comments-list #respond { margin: 0 0 18px 0; }
+#comments-list ul #respond { margin: 0; }
+#cancel-comment-reply-link { font-size: 12px; font-weight: normal; line-height: 18px; }
+#respond .required_lab {  font-weight: bold;   }
+#respond label {   font-size: 14px; }
+#respond input { margin: 0 0 9px;   }
+#respond textarea { width: 96%; height: 145px;  }
+#respond .form-allowed-tags { color: #888; font-size: 12px; line-height: 18px; display:none; }
+#respond .form-allowed-tags code { font-size: 11px; }
+#respond .form-submit { text-align:left; margin-top:10px; }
+#respond .form_fields { float: left; width: 36%; margin-right: 5%; }
+#respond .form_fields p { margin-bottom:7px; }
+#respond .form_fields input { width:100%; }
+#respond .comment-form-comment { width: 80%; float: left; }
+#respond .form_fields input, #respond textarea { clear: both; display: block; margin: 3px 0 0; }
+/*********************************************************************************************
+9. Footer  -------------------------  footer.php
+*********************************************************************************************/
+#footer {
+padding:15px 0 0;
+}
+#footer div.column {
+display: inline;
+float: left;
+margin-right: 25px;
+width: 310px;
+}
+#footer div.last {
+margin-right: 0;
+}
+#footer .widget-area {
+padding:0 0 15px;
+margin:0 0 15px;
+border-bottom:3px solid #ececec;
+}
+#footer .column .widget {
+width:310px;
+float:left;
+line-height:1.7;
+overflow:hidden;
+margin-bottom:15px;
+}
+#footer .widget h3.title {
+border-top: 1px solid #E5E5E5;
+border-bottom: 0 none;
+font-size: 14px;
+line-height: 1.3;
+margin: 0 0 10px 0;
+padding:12px 0 0;
+text-transform:uppercase;
+color: #666;
+font-weight:normal;
+}
+.copyright { font-size: 11px; min-height:80px;  width: 100%; }
+.copyright .left { margin: 10px 0; float: left; }
+.copyright .right { float: right; margin: 10px 0;}
+p.wpzoom { display: inline; float: right; line-height: 16px;  }
+p.wpzoom img { display: inline; float: right; padding: 0 0 0 2px; }
+/*********************************************************************************************
+9. Media Queries
+*********************************************************************************************/
+/* Tablet Landscape */
+@media screen and (max-width: 1060px) {
+body { min-width:100%; }
+.inner-wrap { width: 90%; padding: 0 3%; }
+#content { width:66%;}
+#navsocial { float:left; }
+#slider {width:100%; padding:0; }
+#slider #slides { width:100%; padding-left:0; }
+#slider #slides li img { width:100%; }
+#slider #slides .slide_content {width:60%; }
+#slider #slides.small-size .slide_content {width:70%; }
+#slider #slides h2 a { font-size: 22px;  }
+.home_widgets .home_column {  width: 32%; margin: 0 2% 0 0;  }
+.home_widgets .home_column img { width:auto; max-width:100%; height:auto; }
+.recent-post { width: 100%; float: left; }
+.recent-post .post-thumb { float:left; margin:0 10px 0 0;}
+.col_main,
+.full-width .col_main { width:80%; }
+.col_meta,
+.full-width .col_meta { width:16%; }
+#sidebar { width:30%; }
+#sidebar .widget {width:100%; margin-right:2%; float:left; }
+.cover { position: relative; padding-bottom: 56.25%; display:block; padding-top: 30px; height: 0; overflow: hidden; width: 100%; max-width: 100%; }
+.cover iframe,
+.cover object,
+.cover embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+/* Template: Full-width */
+.full-width #content { width: 100%; }
+.full-width h1.archive_title { width:100%; }
+.full-width .entry img { max-width: 100%; }
+.full-width .entry .wp-caption { max-width:100%;  }
+#footer div.column { margin-right: 2%;  width: 31%; }
+#footer .column .widget {  width:100%; }
+.entry img.alignnone,
+.entry img.aligncenter,
+.entry img.alignleft,
+.entry img.alignright,
+.entry img.attachment-fullsize {
+margin-bottom: 10px;
+max-width: 100%;
+width:auto;
+height:auto;
+}
+.full-width .entry img.alignnone,
+.full-width .entry img.aligncenter,
+.full-width .entry img.alignleft,
+.full-width .entry img.alignright,
+.full-width .entry img.attachment-fullsize {
+margin-bottom: 10px;
+max-width: 100%;
+width:auto;
+height:auto;
+}
+}
+/* Tabled Portrait */
+@media screen and (max-width: 768px) {
+#slider #slides.small-size .slide_content { display:none; }
+.col_main, .full-width .col_main { width:100%; }
+.col_meta, .full-width .col_meta { width:100%; }
+.share_box .share_btn { float:left; width:30%; }
+.widget_archive li { width:100%;  }
+.share_box .share_btn:after {  content: ".";  display: block;  height: 0;  clear: both;  visibility: hidden;  }
+}
+/* All Mobile Sizes (devices and browser) */
+@media screen and (max-width: 640px) {
+.inner-wrap { width: 94%; padding: 0 3%; }
+#content { width:100%;}
+#slider #slides .slide_content { display:none; }
+#slider #slides { width:100%; padding-left:0; border:none; }
+#slider #slides li img { width:100%; }
+.home_widgets { margin-left:0%;  }
+.recent-post .post-content {overflow:visible; }
+.recent-post .post-thumb { width:100%; margin-right:0;}
+.recent-post .post-thumb img { width:100%;}
+#respond .form_fields { width:97%; margin:0; }
+#respond .comment-form-comment {width:99%; }
+#respond .form_fields input { width:98%; }
+.children #respond { margin-right:0; }
+#sidebar { width:100%; margin-left:0%;}
+#sidebar .widget {width:100%; margin-right:0%; float:none; }
+#footer div.column { margin-right: 0;  width: 100%; }
+#footer .column .widget { width:100%; }
+}
+.comments-content ol {   list-style: none outside none;
+margin: 0;
+}
+.avatar-image-container img {width:60px;height:60px; left: 0;
+position: absolute;
+top: 4px;}
+.comments-content ol li {border-bottom: 1px solid #DEDEDE;
+font-size: 12px;
+line-height: 1.7;
+margin: 0 0 24px;
+padding: 0 0 0 76px;
+position: relative;}
+.comments-content ol li .comment-actions{ display: block;
+font-size: 12px;
+padding: 0 0 24px;}
+.comments-content ol li ol li {border:none;margin: 0;}
+.comments-content ol li ol .continue {display:block;padding: 0 0 0 76px;margin: 0 0 24px;}
+.comments-content ol li cite {color: #B1B1B1;
+font-size: 14px;
+font-style: normal;
+font-weight: bold;}
+.comments-content ol li span.datetime { float: right;
+font-size: 12px;
+margin: 0;}
+.comments-content ol li span.datetime a {color: #888888;}
+.thread-toggle {display:none;}
+#Attribution1 {display: none;}
+.dp-highlighter
+{
+font-family: "Consolas", "Monaco", "Courier New", Courier, monospace;
+font-size: 12px;
+background-color: #E7E5DC;
+width: 99%;
+overflow: auto;
+margin: 18px 0 18px 0 !important;
+padding-top: 1px; /* adds a little border on top when controls are hidden */
+}
+/* clear styles */
+.dp-highlighter ol,
+.dp-highlighter ol li,
+.dp-highlighter ol li span
+{
+margin: 0;
+padding: 0;
+border: none;
+}
+.dp-highlighter a,
+.dp-highlighter a:hover
+{
+background: none;
+border: none;
+padding: 0;
+margin: 0;
+}
+.dp-highlighter .bar
+{
+padding-left: 45px;
+}
+.dp-highlighter.collapsed .bar,
+.dp-highlighter.nogutter .bar
+{
+padding-left: 0px;
+}
+.dp-highlighter ol
+{
+list-style: decimal; /* for ie */
+background-color: #fff;
+margin: 0px 0px 1px 45px !important; /* 1px bottom margin seems to fix occasional Firefox scrolling */
+padding: 0px;
+color: #5C5C5C;
+}
+.dp-highlighter.nogutter ol,
+.dp-highlighter.nogutter ol li
+{
+list-style: none !important;
+margin-left: 0px !important;
+}
+.dp-highlighter ol li,
+.dp-highlighter .columns div
+{
+list-style: decimal-leading-zero; /* better look for others, override cascade from OL */
+list-style-position: outside !important;
+border-left: 3px solid #6CE26C;
+background-color: #F8F8F8;
+color: #5C5C5C;
+padding: 0 3px 0 10px !important;
+margin: 0 !important;
+line-height: 14px;
+}
+.dp-highlighter.nogutter ol li,
+.dp-highlighter.nogutter .columns div
+{
+border: 0;
+}
+.dp-highlighter .columns
+{
+background-color: #F8F8F8;
+color: gray;
+overflow: hidden;
+width: 100%;
+}
+.dp-highlighter .columns div
+{
+padding-bottom: 5px;
+}
+.dp-highlighter ol li.alt
+{
+background-color: #FFF;
+color: inherit;
+}
+.dp-highlighter ol li span
+{
+color: black;
+background-color: inherit;
+}
+/* Adjust some properties when collapsed */
+.dp-highlighter.collapsed ol
+{
+margin: 0px;
+}
+.dp-highlighter.collapsed ol li
+{
+display: none;
+}
+/* Additional modifications when in print-view */
+.dp-highlighter.printing
+{
+border: none;
+}
+.dp-highlighter.printing .tools
+{
+display: none !important;
+}
+.dp-highlighter.printing li
+{
+display: list-item !important;
+}
+/* Styles for the tools */
+.dp-highlighter .tools
+{
+padding: 3px 8px 3px 10px;
+font: 9px Verdana, Geneva, Arial, Helvetica, sans-serif;
+color: silver;
+background-color: #f8f8f8;
+padding-bottom: 10px;
+border-left: 3px solid #6CE26C;
+}
+.dp-highlighter.nogutter .tools
+{
+border-left: 0;
+}
+.dp-highlighter.collapsed .tools
+{
+border-bottom: 0;
+}
+.dp-highlighter .tools a
+{
+font-size: 9px;
+color: #a0a0a0;
+background-color: inherit;
+text-decoration: none;
+margin-right: 10px;
+}
+.dp-highlighter .tools a:hover
+{
+color: red;
+background-color: inherit;
+text-decoration: underline;
+}
+/* About dialog styles */
+.dp-about { background-color: #fff; color: #333; margin: 0px; padding: 0px; }
+.dp-about table { width: 100%; height: 100%; font-size: 11px; font-family: Tahoma, Verdana, Arial, sans-serif !important; }
+.dp-about td { padding: 10px; vertical-align: top; }
+.dp-about .copy { border-bottom: 1px solid #ACA899; height: 95%; }
+.dp-about .title { color: red; background-color: inherit; font-weight: bold; }
+.dp-about .para { margin: 0 0 4px 0; }
+.dp-about .footer { background-color: #ECEADB; color: #333; border-top: 1px solid #fff; text-align: right; }
+.dp-about .close { font-size: 11px; font-family: Tahoma, Verdana, Arial, sans-serif !important; background-color: #ECEADB; color: #333; width: 60px; height: 22px; }
+/* Language specific styles */
+.dp-highlighter .comment, .dp-highlighter .comments { color: #008200; background-color: inherit; }
+.dp-highlighter .string { color: blue; background-color: inherit; }
+.dp-highlighter .keyword { color: #069; font-weight: bold; background-color: inherit; }
+.dp-highlighter .preprocessor { color: gray; background-color: inherit; }
+
+--></style>
+<script src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+/*
+ * Superfish v1.4.8 - jQuery menu widget
+ * Copyright (c) 2008 Joel Birch
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ * 	http://www.opensource.org/licenses/mit-license.php
+ * 	http://www.gnu.org/licenses/gpl.html
+ *
+ * CHANGELOG: http://users.tpg.com.au/j_birch/plugins/superfish/changelog.txt
+ */
+(function($){$.fn.superfish=function(op){var sf=$.fn.superfish,c=sf.c,$arrow=$(['<span class="',c.arrowClass,'"> &#xbb;</span>'].join("")),over=function(){var $$=$(this),menu=getMenu($$);clearTimeout(menu.sfTimer);$$.showSuperfishUl().siblings().hideSuperfishUl();},out=function(){var $$=$(this),menu=getMenu($$),o=sf.op;clearTimeout(menu.sfTimer);menu.sfTimer=setTimeout(function(){o.retainPath=($.inArray($$[0],o.$path)>-1);$$.hideSuperfishUl();if(o.$path.length&&$$.parents(["li.",o.hoverClass].join("")).length<1){over.call(o.$path);}},o.delay);},getMenu=function($menu){var menu=$menu.parents(["ul.",c.menuClass,":first"].join(""))[0];sf.op=sf.o[menu.serial];return menu;},addArrow=function($a){$a.addClass(c.anchorClass).append($arrow.clone());};return this.each(function(){var s=this.serial=sf.o.length;var o=$.extend({},sf.defaults,op);o.$path=$("li."+o.pathClass,this).slice(0,o.pathLevels).each(function(){$(this).addClass([o.hoverClass,c.bcClass].join(" ")).filter("li:has(ul)").removeClass(o.pathClass);});sf.o[s]=sf.op=o;$("li:has(ul)",this)[($.fn.hoverIntent&&!o.disableHI)?"hoverIntent":"hover"](over,out).each(function(){if(o.autoArrows){addArrow($(">a:first-child",this));}}).not("."+c.bcClass).hideSuperfishUl();var $a=$("a",this);$a.each(function(i){var $li=$a.eq(i).parents("li");$a.eq(i).focus(function(){over.call($li);}).blur(function(){out.call($li);});});o.onInit.call(this);}).each(function(){var menuClasses=[c.menuClass];if(sf.op.dropShadows&&!($.browser.msie&&$.browser.version<7)){menuClasses.push(c.shadowClass);}$(this).addClass(menuClasses.join(" "));});};var sf=$.fn.superfish;sf.o=[];sf.op={};sf.IE7fix=function(){var o=sf.op;if($.browser.msie&&$.browser.version>6&&o.dropShadows&&o.animation.opacity!=undefined){this.toggleClass(sf.c.shadowClass+"-off");}};sf.c={bcClass:"sf-breadcrumb",menuClass:"sf-js-enabled",anchorClass:"sf-with-ul",arrowClass:"sf-sub-indicator",shadowClass:"sf-shadow"};sf.defaults={hoverClass:"sfHover",pathClass:"overideThisToUse",pathLevels:1,delay:800,animation:{opacity:"show"},speed:"normal",autoArrows:true,dropShadows:true,disableHI:false,onInit:function(){},onBeforeShow:function(){},onShow:function(){},onHide:function(){}};$.fn.extend({hideSuperfishUl:function(){var o=sf.op,not=(o.retainPath===true)?o.$path:"";o.retainPath=false;var $ul=$(["li.",o.hoverClass].join(""),this).add(this).not(not).removeClass(o.hoverClass).find(">ul").hide().css("visibility","hidden");o.onHide.call($ul);return this;},showSuperfishUl:function(){var o=sf.op,sh=sf.c.shadowClass+"-off",$ul=this.addClass(o.hoverClass).find(">ul:hidden").css("visibility","visible");sf.IE7fix.call($ul);o.onBeforeShow.call($ul);$ul.animate(o.animation,o.speed,function(){sf.IE7fix.call($ul);o.onShow.call($ul);});return this;}});})(jQuery);
+
+jQuery(document).ready(function($) { 
+	
+	$('#navbar ul.dropdown').superfish({ 
+		delay:       100,								// 0.1 second delay on mouseout 
+		animation:   {opacity:'show',height:'show'},	// fade-in and slide-down animation 
+		dropShadows: false								// disable drop shadows 
+	});
+	
+	$('#navbarsecond ul.dropdown').superfish({ 
+		delay:       100,								// 0.1 second delay on mouseout 
+		animation:   {opacity:'show',height:'show'},	// fade-in and slide-down animation 
+		dropShadows: false								// disable drop shadows 
+	});
+	
+});
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+/*!
+ * jQuery Tools v1.2.7 - The missing UI library for the Web
+ * 
+ * tabs/tabs.js
+ * tabs/tabs.slideshow.js
+ * 
+ * NO COPYRIGHTS OR LICENSES. DO WHAT YOU LIKE.
+ * 
+ * http://flowplayer.org/tools/
+ * 
+ */
+(function(a){a.tools=a.tools||{version:"v1.2.7"},a.tools.tabs={conf:{tabs:"a",current:"current",onBeforeClick:null,onClick:null,effect:"default",initialEffect:!1,initialIndex:0,event:"click",rotate:!1,slideUpSpeed:400,slideDownSpeed:400,history:!1},addEffect:function(a,c){b[a]=c}};var b={"default":function(a,b){this.getPanes().hide().eq(a).show(),b.call()},fade:function(a,b){var c=this.getConf(),d=c.fadeOutSpeed,e=this.getPanes();d?e.fadeOut(d):e.hide(),e.eq(a).fadeIn(c.fadeInSpeed,b)},slide:function(a,b){var c=this.getConf();this.getPanes().slideUp(c.slideUpSpeed),this.getPanes().eq(a).slideDown(c.slideDownSpeed,b)},ajax:function(a,b){this.getPanes().eq(0).load(this.getTabs().eq(a).attr("href"),b)}},c,d;a.tools.tabs.addEffect("horizontal",function(b,e){if(!c){var f=this.getPanes().eq(b),g=this.getCurrentPane();d||(d=this.getPanes().eq(0).width()),c=!0,f.show(),g.animate({width:0},{step:function(a){f.css("width",d-a)},complete:function(){a(this).hide(),e.call(),c=!1}}),g.length||(e.call(),c=!1)}});function e(c,d,e){var f=this,g=c.add(this),h=c.find(e.tabs),i=d.jquery?d:c.children(d),j;h.length||(h=c.children()),i.length||(i=c.parent().find(d)),i.length||(i=a(d)),a.extend(this,{click:function(d,i){var k=h.eq(d),l=!c.data("tabs");typeof d=="string"&&d.replace("#","")&&(k=h.filter("[href*=\""+d.replace("#","")+"\"]"),d=Math.max(h.index(k),0));if(e.rotate){var m=h.length-1;if(d<0)return f.click(m,i);if(d>m)return f.click(0,i)}if(!k.length){if(j>=0)return f;d=e.initialIndex,k=h.eq(d)}if(d===j)return f;i=i||a.Event(),i.type="onBeforeClick",g.trigger(i,[d]);if(!i.isDefaultPrevented()){var n=l?e.initialEffect&&e.effect||"default":e.effect;b[n].call(f,d,function(){j=d,i.type="onClick",g.trigger(i,[d])}),h.removeClass(e.current),k.addClass(e.current);return f}},getConf:function(){return e},getTabs:function(){return h},getPanes:function(){return i},getCurrentPane:function(){return i.eq(j)},getCurrentTab:function(){return h.eq(j)},getIndex:function(){return j},next:function(){return f.click(j+1)},prev:function(){return f.click(j-1)},destroy:function(){h.off(e.event).removeClass(e.current),i.find("a[href^=\"#\"]").off("click.T");return f}}),a.each("onBeforeClick,onClick".split(","),function(b,c){a.isFunction(e[c])&&a(f).on(c,e[c]),f[c]=function(b){b&&a(f).on(c,b);return f}}),e.history&&a.fn.history&&(a.tools.history.init(h),e.event="history"),h.each(function(b){a(this).on(e.event,function(a){f.click(b,a);return a.preventDefault()})}),i.find("a[href^=\"#\"]").on("click.T",function(b){f.click(a(this).attr("href"),b)}),location.hash&&e.tabs=="a"&&c.find("[href=\""+location.hash+"\"]").length?f.click(location.hash):(e.initialIndex===0||e.initialIndex>0)&&f.click(e.initialIndex)}a.fn.tabs=function(b,c){var d=this.data("tabs");d&&(d.destroy(),this.removeData("tabs")),a.isFunction(c)&&(c={onBeforeClick:c}),c=a.extend({},a.tools.tabs.conf,c),this.each(function(){d=new e(a(this),b,c),a(this).data("tabs",d)});return c.api?d:this}})(jQuery);
+(function(a){var b;b=a.tools.tabs.slideshow={conf:{next:".forward",prev:".backward",disabledClass:"disabled",autoplay:!1,autopause:!0,interval:3e3,clickable:!0,api:!1}};function c(b,c){var d=this,e=b.add(this),f=b.data("tabs"),g,h=!0;function i(c){var d=a(c);return d.length<2?d:b.parent().find(c)}var j=i(c.next).click(function(){f.next()}),k=i(c.prev).click(function(){f.prev()});function l(){g=setTimeout(function(){f.next()},c.interval)}a.extend(d,{getTabs:function(){return f},getConf:function(){return c},play:function(){if(g)return d;var b=a.Event("onBeforePlay");e.trigger(b);if(b.isDefaultPrevented())return d;h=!1,e.trigger("onPlay"),e.on("onClick",l),l();return d},pause:function(){if(!g)return d;var b=a.Event("onBeforePause");e.trigger(b);if(b.isDefaultPrevented())return d;g=clearTimeout(g),e.trigger("onPause"),e.off("onClick",l);return d},resume:function(){h||d.play()},stop:function(){d.pause(),h=!0}}),a.each("onBeforePlay,onPlay,onBeforePause,onPause".split(","),function(b,e){a.isFunction(c[e])&&a(d).on(e,c[e]),d[e]=function(b){return a(d).on(e,b)}}),c.autopause&&f.getTabs().add(j).add(k).add(f.getPanes()).hover(d.pause,d.resume),c.autoplay&&d.play(),c.clickable&&f.getPanes().click(function(){f.next()});if(!f.getConf().rotate){var m=c.disabledClass;f.getIndex()||k.addClass(m),f.onBeforeClick(function(a,b){k.toggleClass(m,!b),j.toggleClass(m,b==f.getTabs().length-1)})}}a.fn.slideshow=function(d){var e=this.data("slideshow");if(e)return e;d=a.extend({},b.conf,d),this.each(function(){e=new c(a(this),d),a(this).data("slideshow",e)});return d.api?e:this}})(jQuery);
+
+//]]>
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+
+jQuery(".pagination").tabs(".slides li", {
+ 	effect: 'fade',
+ 	rotate: true
+		}).slideshow({
+			clickable: false,
+			autoplay:  false, 
+			interval: 3000 
+		});
+
+
+jQuery(".tabs").tabs(".slide li", {event:'mouseover', effect: 'fade'});
+  
+});
+</script>
+<script type="text/javascript">
+//<![CDATA[
+   imgr = new Array();
+
+imgr[0] = "http://sites.google.com/site/fdblogsite/Home/nothumbnail.gif";
+
+showRandomImg = true;
+
+aBold = true;
+
+summaryPost = 70; 
+summaryTitle = 25; 
+
+numposts  = 6; 
+numposts1 = 3; 
+numposts2 = 1;
+numposts3 = 4;
+numposts5 = 5;
+numposts6 = 10; 
+
+
+
+
+function removeHtmlTag(strx,chop){
+	var s = strx.split("<");
+	for(var i=0;i<s.length;i++){
+		if(s[i].indexOf(">")!=-1){
+			s[i] = s[i].substring(s[i].indexOf(">")+1,s[i].length);
+		}
+	}
+	s =  s.join("");
+	s = s.substring(0,chop-1);
+	return s;
+}
+
+
+function showrecentposts1(json) {
+	j = (showRandomImg) ? Math.floor((imgr.length+1)*Math.random()) : 0;
+	img  = new Array();
+    if (numposts1 <= json.feed.entry.length) {
+		maxpost = numposts1;
+		}
+	else
+       {
+	   maxpost=json.feed.entry.length;
+	   }	
+	   document.write('<ul class="slides">');
+  	for (var i = 0; i < maxpost; i++) {
+    	var entry = json.feed.entry[i];
+    	var posttitle = entry.title.$t;
+		var pcm;
+    	var posturl;
+    	if (i == json.feed.entry.length) break;
+    	for (var k = 0; k < entry.link.length; k++) {
+      		if (entry.link[k].rel == 'alternate') {
+        		posturl = entry.link[k].href;
+        		break;
+      		}
+    	}
+		
+		for (var k = 0; k < entry.link.length; k++) {
+      		if (entry.link[k].rel == 'replies' && entry.link[k].type == 'text/html') {
+        		pcm = entry.link[k].title.split(" ")[0];
+        		break;
+      		}
+    	}
+		
+    	if ("content" in entry) {
+      		var postcontent = entry.content.$t;}
+    	else
+    	if ("summary" in entry) {
+      		var postcontent = entry.summary.$t;}
+    	else var postcontent = "";
+    	
+    	postdate = entry.published.$t;
+	
+	if(j>imgr.length-1) j=0;
+	img[i] = imgr[j];
+	
+	s = postcontent	; a = s.indexOf("<img"); b = s.indexOf("src=\"",a); c = s.indexOf("\"",b+5); d = s.substr(b+5,c-b-5);
+
+	if((a!=-1)&&(b!=-1)&&(c!=-1)&&(d!="")) img[i] = d;
+
+	//cmtext = (text != 'no') ? '<i><font color="'+acolor+'">('+pcm+' '+text+')</font></i>' : '';
+
+
+	var month = [1,2,3,4,5,6,7,8,9,10,11,12];
+	var month2 = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+	var day = postdate.split("-")[2].substring(0,2);
+	var m = postdate.split("-")[1];
+	var y = postdate.split("-")[0];
+
+	for(var u2=0;u2<month.length;u2++){
+		if(parseInt(m)==month[u2]) {
+			m = month2[u2] ; break;
+		}
+	}
+
+	var daystr = day+ ' ' + m + ' ' + y ;
+    pcm='<a href="'+posturl+'#disqus_thread'+'"></a>';
+ 
+	var trtd = '<li><a href="'+posturl+'"><img width="980" height="550" src="'+img[i]+'"/></a><div class="slide_content"><h2><a href="'+posturl+'">'+posttitle+'</a></h2><p>'+removeHtmlTag(postcontent,summaryPost)+' [...]</p></div></li>';
+	document.write(trtd);
+
+
+	j++;
+}
+document.write('</ul>');
+}
+
+function showrecentposts1a(json) {
+	j = (showRandomImg) ? Math.floor((imgr.length+1)*Math.random()) : 0;
+	img  = new Array();
+    if (numposts1 <= json.feed.entry.length) {
+		maxpost = numposts1;
+		}
+	else
+       {
+	   maxpost=json.feed.entry.length;
+	   }	
+	   document.write('<ul class="pagination">');
+  	for (var i = 0; i < maxpost; i++) {
+    	var entry = json.feed.entry[i];
+    	var posttitle = entry.title.$t;
+		var pcm;
+    	var posturl;
+    	if (i == json.feed.entry.length) break;
+    	for (var k = 0; k < entry.link.length; k++) {
+      		if (entry.link[k].rel == 'alternate') {
+        		posturl = entry.link[k].href;
+        		break;
+      		}
+    	}
+		
+		for (var k = 0; k < entry.link.length; k++) {
+      		if (entry.link[k].rel == 'replies' && entry.link[k].type == 'text/html') {
+        		pcm = entry.link[k].title.split(" ")[0];
+        		break;
+      		}
+    	}
+		
+    	if ("content" in entry) {
+      		var postcontent = entry.content.$t;}
+    	else
+    	if ("summary" in entry) {
+      		var postcontent = entry.summary.$t;}
+    	else var postcontent = "";
+    	
+    	postdate = entry.published.$t;
+	
+	if(j>imgr.length-1) j=0;
+	img[i] = imgr[j];
+	
+	s = postcontent	; a = s.indexOf("<img"); b = s.indexOf("src=\"",a); c = s.indexOf("\"",b+5); d = s.substr(b+5,c-b-5);
+
+	if((a!=-1)&&(b!=-1)&&(c!=-1)&&(d!="")) img[i] = d;
+
+	//cmtext = (text != 'no') ? '<i><font color="'+acolor+'">('+pcm+' '+text+')</font></i>' : '';
+
+
+	var month = [1,2,3,4,5,6,7,8,9,10,11,12];
+	var month2 = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+	var day = postdate.split("-")[2].substring(0,2);
+	var m = postdate.split("-")[1];
+	var y = postdate.split("-")[0];
+
+	for(var u2=0;u2<month.length;u2++){
+		if(parseInt(m)==month[u2]) {
+			m = month2[u2] ; break;
+		}
+	}
+
+	var daystr = day+ ' ' + m + ' ' + y ;
+    pcm='<a href="'+posturl+'#disqus_thread'+'"></a>';
+ 
+	var trtd = '<li>'+posttitle+'</li>';
+	document.write(trtd);
+
+
+	j++;
+}
+document.write('</ul>');
+}
+
+function showrecentposts2(json) {
+	j = (showRandomImg) ? Math.floor((imgr.length+1)*Math.random()) : 0;
+	img  = new Array();
+    if (numposts2 <= json.feed.entry.length) {
+		maxpost = numposts2;
+		}
+	else
+       {
+	   maxpost=json.feed.entry.length;
+	   }	
+	   
+  	for (var i = 0; i < maxpost; i++) {
+    	var entry = json.feed.entry[i];
+    	var posttitle = entry.title.$t;
+		var pcm;
+    	var posturl;
+    	if (i == json.feed.entry.length) break;
+    	for (var k = 0; k < entry.link.length; k++) {
+      		if (entry.link[k].rel == 'alternate') {
+        		posturl = entry.link[k].href;
+        		break;
+      		}
+    	}
+		
+		for (var k = 0; k < entry.link.length; k++) {
+      		if (entry.link[k].rel == 'replies' && entry.link[k].type == 'text/html') {
+        		pcm = entry.link[k].title.split(" ")[0];
+        		break;
+      		}
+    	}
+		
+    	if ("content" in entry) {
+      		var postcontent = entry.content.$t;}
+    	else
+    	if ("summary" in entry) {
+      		var postcontent = entry.summary.$t;}
+    	else var postcontent = "";
+    	
+    	postdate = entry.published.$t;
+	
+	if(j>imgr.length-1) j=0;
+	img[i] = imgr[j];
+	
+	s = postcontent	; a = s.indexOf("<img"); b = s.indexOf("src=\"",a); c = s.indexOf("\"",b+5); d = s.substr(b+5,c-b-5);
+
+	if((a!=-1)&&(b!=-1)&&(c!=-1)&&(d!="")) img[i] = d;
+
+	//cmtext = (text != 'no') ? '<i><font color="'+acolor+'">('+pcm+' '+text+')</font></i>' : '';
+
+
+	var month = [1,2,3,4,5,6,7,8,9,10,11,12];
+	var month2 = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+	var day = postdate.split("-")[2].substring(0,2);
+	var m = postdate.split("-")[1];
+	var y = postdate.split("-")[0];
+
+	for(var u2=0;u2<month.length;u2++){
+		if(parseInt(m)==month[u2]) {
+			m = month2[u2] ; break;
+		}
+	}
+
+	var daystr = day+ ' ' + m + ' ' + y ;
+    
+ 
+	var trtd = '<div class="post-thumb"><a href="'+posturl+'"><img width="310" height="220" src="'+img[i]+'"/></a></div><h3><a href="'+posturl+'">'+posttitle+'</a></h3><div class="post-content"><p>'+removeHtmlTag(postcontent,summaryPost)+' [...]</p></div><div class="recent-meta"><span>Posted in '+daystr+'</span><span class="separator">×</span><span><a href="'+posturl+'">'+pcm+' comments</a></span></div>';
+	document.write(trtd);
+
+
+	j++;
+}
+
+}
+
+function showrecentposts3(json) {
+	j = (showRandomImg) ? Math.floor((imgr.length+1)*Math.random()) : 0;
+	img  = new Array();
+    if (numposts3 <= json.feed.entry.length) {
+		maxpost = numposts3;
+		}
+	else
+       {
+	   maxpost=json.feed.entry.length;
+	   }	
+	   
+  	for (var i = 0; i < maxpost; i++) {
+    	var entry = json.feed.entry[i];
+    	var posttitle = entry.title.$t;
+		var pcm;
+    	var posturl;
+    	if (i == json.feed.entry.length) break;
+    	for (var k = 0; k < entry.link.length; k++) {
+      		if (entry.link[k].rel == 'alternate') {
+        		posturl = entry.link[k].href;
+        		break;
+      		}
+    	}
+		
+		for (var k = 0; k < entry.link.length; k++) {
+      		if (entry.link[k].rel == 'replies' && entry.link[k].type == 'text/html') {
+        		pcm = entry.link[k].title.split(" ")[0];
+        		break;
+      		}
+    	}
+		
+    	if ("content" in entry) {
+      		var postcontent = entry.content.$t;}
+    	else
+    	if ("summary" in entry) {
+      		var postcontent = entry.summary.$t;}
+    	else var postcontent = "";
+    	
+    	postdate = entry.published.$t;
+	
+	if(j>imgr.length-1) j=0;
+	img[i] = imgr[j];
+	
+	s = postcontent	; a = s.indexOf("<img"); b = s.indexOf("src=\"",a); c = s.indexOf("\"",b+5); d = s.substr(b+5,c-b-5);
+
+	if((a!=-1)&&(b!=-1)&&(c!=-1)&&(d!="")) img[i] = d;
+
+	//cmtext = (text != 'no') ? '<i><font color="'+acolor+'">('+pcm+' '+text+')</font></i>' : '';
+
+
+	var month = [1,2,3,4,5,6,7,8,9,10,11,12];
+	var month2 = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+	var day = postdate.split("-")[2].substring(0,2);
+	var m = postdate.split("-")[1];
+	var y = postdate.split("-")[0];
+
+	for(var u2=0;u2<month.length;u2++){
+		if(parseInt(m)==month[u2]) {
+			m = month2[u2] ; break;
+		}
+	}
+
+	var daystr = day+ ' ' + m + ' ' + y ;
+    
+ 
+	var trtd = '<li><a href="'+posturl+'"><img width="75" height="50" src="'+img[i]+'"/></a><a href="'+posturl+'">'+posttitle+'</a> <br/><small>'+daystr+'</small> <br/><div class="clear"></div></li>';
+	document.write(trtd);
+
+
+	j++;
+}
+
+}
+
+
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+var classicMode = false ;
+var summary = 30;
+var indent = 3;
+
+function stripHtmlTags(s,max){return s.replace(/<.*?>/ig, '').split(/\s+/).slice(0,max-1).join(' ')}
+
+function getSummaryLikeWP(id) {
+        return document.getElementById(id).innerHTML.split(/<!--\s*more\s*-->/)[0];
+}
+
+function getSummaryImproved(post,max){
+   var re = /<.*?>/gi
+   var re2 = /<br.*?>/gi
+   var re3 = /(<\/{1}p>)|(<\/{1}div>)/gi
+   var re4 = /(<style.*?\/{1}style>)|(<script.*?\/{1}script>)|(<table.*?\/{1}table>)|(<form.*?\/{1}form>)|(<code.*?\/{1}code>)|(<pre.*?\/{1}pre>)/gi
+   
+   post = post.replace(re4,'')
+   post = post.replace(re3,'<br /> ').split(re2)
+   
+   for(var i=0; i<post.length; i++){
+    post[i] = post[i].replace(re,'');
+   }
+ var post2 = new Array();
+ for(var i in post) {
+  //if(post[i]!='' && post[i]!=' ' && post[i] != '\n') post2.push(post[i]);
+  if(/[a-zA-Z0-9]/.test(post[i])) post2.push(post[i]) ;
+
+ }
+ 
+ 
+ var s = "";
+ var indentBlank = "";
+ for(var i=0;i<indent;i++){
+  indentBlank += " ";
+ }
+ if(post2.join('<br/>').split(' ').length < max-1 ){
+   s = post2.join(indentBlank +' <br/>');
+ } else {
+  var i = 0;
+  while(s.split(' ').length < max){
+   s += indentBlank + ' ' + post2[i]+'<br/>';
+   i++;
+  }
+ }  
+ return s;
+}
+
+
+function createSummaryAndThumb(pID,title,url,date,comment){
+ var posturl= url;
+ var title=title;
+ var date =date;
+ var comment = comment;
+ var div = document.getElementById(pID);
+ var content = div.innerHTML;
+ if (/<!--\s*more\s*-->/.test(content)) {
+  div.innerHTML = getSummaryLikeWP(pID);
+  div.style.display = "block";
+ } 
+ else {
+ 
+ var imgtag = "";
+ var img = div.getElementsByTagName("img");
+ var summ = summary;
+ if(img.length>=1) { 
+   imgtag = '<a href="'+posturl+'"><img class="entry-thumb" width="216" height="160" src="'+img[0].src+'"></a>';
+   }
+  var summary1 = '<div class="post-thumb">'+imgtag+'</div><div class="post-content"><h2><a href="'+posturl+'">'+title+'</a></h2><div class="entry"><p>'+stripHtmlTags(content,summary)+'[...]</p></div><div class="clear"></div><div class="recent-meta"><span>'+date+'</span><span class="separator">×</span><span>'+comment+'</span></div></div>';
+ 
+ div.innerHTML = summary1;
+ div.style.display = "block";
+ }
+}
+
+
+function showrecentcomments(json) {
+for (var i = 0; i < 6; i++) {
+var entry = json.feed.entry[i];
+var ctlink;
+if (i == json.feed.entry.length) break;
+for (var k = 0; k < entry.link.length; k++) {
+if (entry.link[k].rel == 'alternate') {
+ctlink = entry.link[k].href;
+break;
+}
+}
+if ("content" in entry) {
+var comment = entry.content.$t;}
+else
+if ("summary" in entry) {
+var comment = entry.summary.$t;}
+else var comment = "";
+comment = comment.replace(/<.*?>/ig, '');
+document.write('<li>');
+document.write('<a href="' + ctlink + '">' + entry.author[0].name.$t + '</a> : ');
+if (comment.length < 100) {
+document.write(comment);
+}
+else
+{
+comment = comment.substring(0, 100);
+var quoteEnd = comment.lastIndexOf(" ");
+comment = comment.substring(0, quoteEnd);
+document.write(comment + '...');
+}
+
+document.write('</li>');
+}
+}
+
+
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+var relatedTitles = new Array();
+var relatedTitlesNum = 0;
+var relatedUrls = new Array();
+function related_results_labels(json) {
+for (var i = 0; i < json.feed.entry.length; i++) {
+var entry = json.feed.entry[i];
+relatedTitles[relatedTitlesNum] = entry.title.$t;
+for (var k = 0; k < entry.link.length; k++) {
+if (entry.link[k].rel == 'alternate') {
+relatedUrls[relatedTitlesNum] = entry.link[k].href;
+relatedTitlesNum++;
+break;
+}
+}
+}
+}
+function removeRelatedDuplicates() {
+var tmp = new Array(0);
+var tmp2 = new Array(0);
+for(var i = 0; i < relatedUrls.length; i++) {
+if(!contains(tmp, relatedUrls[i])) {
+tmp.length += 1;
+tmp[tmp.length - 1] = relatedUrls[i];
+tmp2.length += 1;
+tmp2[tmp2.length - 1] = relatedTitles[i];
+}
+}
+relatedTitles = tmp2;
+relatedUrls = tmp;
+}
+function contains(a, e) {
+for(var j = 0; j < a.length; j++) if (a[j]==e) return true;
+return false;
+}
+function printRelatedLabels() {
+var r = Math.floor((relatedTitles.length - 1) * Math.random());
+var i = 0;
+
+while (i < relatedTitles.length && i < 20) {
+document.write('<li><a href="' + relatedUrls[r] + '">' + relatedTitles[r] + '</a></li>');
+if (r < relatedTitles.length - 1) {
+r++;
+} else {
+r = 0;
+}
+i++;
+}
+
+}
+//]]>
+</script>
+<!-- Add-in CSS for syntax highlighting -->
+<script src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/shCore.js" type="text/javascript"></script>
+<script src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/shBrushCpp.js" type="text/javascript"></script>
+<script src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/shpython.js" type="text/javascript"></script>
+<script type="text/javascript">var a="indexOf",b="&m=1",e="(^|&)m=",f="?",g="?m=1";function h(){var c=window.location.href,d=c.split(f);switch(d.length){case 1:return c+g;case 2:return 0<=d[1].search(e)?null:c+b;default:return null}}var k=navigator.userAgent;if(-1!=k[a]("Mobile")&&-1!=k[a]("WebKit")&&-1==k[a]("iPad")||-1!=k[a]("Opera Mini")||-1!=k[a]("IEMobile")){var l=h();l&&window.location.replace(l)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script><script type="text/javascript">
+/* <![CDATA[ */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-35477239-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+(function(b){(function(a){"__CF"in b&&"DJS"in b.__CF?b.__CF.DJS.push(a):"addEventListener"in b?b.addEventListener("load",a,!1):b.attachEvent("onload",a)})(function(){"FB"in b&&"Event"in FB&&"subscribe"in FB.Event&&(FB.Event.subscribe("edge.create",function(a){_gaq.push(["_trackSocial","facebook","like",a])}),FB.Event.subscribe("edge.remove",function(a){_gaq.push(["_trackSocial","facebook","unlike",a])}),FB.Event.subscribe("message.send",function(a){_gaq.push(["_trackSocial","facebook","send",a])}));"twttr"in b&&"events"in twttr&&"bind"in twttr.events&&twttr.events.bind("tweet",function(a){if(a){var b;if(a.target&&a.target.nodeName=="IFRAME")a:{if(a=a.target.src){a=a.split("#")[0].match(/[^?=&]+=([^&]*)?/g);b=0;for(var c;c=a[b];++b)if(c.indexOf("url")===0){b=unescape(c.split("=")[1]);break a}}b=void 0}_gaq.push(["_trackSocial","twitter","tweet",b])}})})})(window);
+/* ]]> */
+</script>
+
+
+<div class="inner-wrap">
+<header id="header">
+<div id="navbar">
+<ul id="navsocial">
+<li>
+<a href="http://feeds.feedburner.com/rpiblog"><img alt="RSS" height="16" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/rss.png" width="16">RSS</a>
+</li>
+<li>
+<a href="http://twitter.com/RPiBlog" rel="external,nofollow"><img alt="Twitter" height="16" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/twitter.png" width="16">Twitter</a>
+</li>
+<li>
+<a href="http://facebook.com/Raspberry314" rel="external,nofollow"><img alt="Facebook" height="16" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/facebook.png" width="16">Facebook</a>
+</li>
+</ul>
+<ul class="dropdown sf-js-enabled" id="mainmenu">
+<li><a href="http://www.rpiblog.com/p/about.html">About</a></li>
+<li><a href="http://www.rpiblog.com/p/privacy-policy.html">Privacy Policy</a></li>
+<li><a href="http://www.rpiblog.com/p/contact-us.html">Contact Us</a></li>
+<li><a href="http://www.rpiblog.com/p/sponsored-article.html">Sponsored Article</a></li>
+</ul>
+<div class="clear"></div>
+</div><!-- /#navbar -->
+<div class="section" id="header1"><div class="widget Header" id="Header1">
+<div id="header-inner">
+<div class="titlewrapper">
+<h1 class="title">
+<a href="http://www.rpiblog.com/">Raspberry Pi Blog</a>
+</h1>
+</div>
+<div class="descriptionwrapper">
+<p class="description"><span>Get Guides,Tips,Tricks And Information Related To Raspberry Pi</span></p>
+</div>
+</div>
+</div>
+<div class="widget Attribution" id="Attribution1">
+<div class="widget-content" style="text-align: center;">
+Powered by <a href="http://www.blogger.com/" target="_blank">Blogger</a>.
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=4643957133557038581&widgetType=Attribution&widgetId=Attribution1&action=editWidget&sectionId=header1" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Attribution1&quot;));" target="configAttribution1" title="Edit">
+<img alt="" height="18" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div>
+<div id="navbarsecond">
+<ul class="dropdown sf-js-enabled" id="secondmenu">
+<li><a href="http://www.rpiblog.com/">Home</a></li>
+<li><a href="http://www.rpiblog.com/search/label/GPIO">GPIO</a></li>
+<li><a href="http://www.rpiblog.com/search/label/I2C">I2C</a></li>
+<li><a href="http://www.rpiblog.com/search/label/ssh">SSH</a></li>
+<li><a href="http://www.rpiblog.com/search/label/LCD">LCD</a></li>
+<li class=""><a class="sf-with-ul" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html#">Hardware<span class="sf-sub-indicator"> »</span></a>
+<ul class="sub-menu" style="display: none; visibility: hidden;">
+<li><a href="http://www.rpiblog.com/search/label/I2C">I2C</a></li>
+<li><a href="http://www.rpiblog.com/search/label/ADC">ADC</a></li>
+<li><a href="http://www.rpiblog.com/search/label/PWM">PWM</a></li>
+<li><a href="http://www.rpiblog.com/search/label/LED">LED</a></li>
+<li><a href="http://www.rpiblog.com/search/label/LCD">LCD</a></li>
+</ul>
+</li>
+<li class=""><a class="sf-with-ul" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html#">Software<span class="sf-sub-indicator"> »</span></a>
+<ul class="sub-menu" style="display: none; visibility: hidden;">
+<li><a href="http://www.rpiblog.com/search/label/Python">Python</a></li>
+<li><a href="http://www.rpiblog.com/search/label/C">C</a></li>
+<li><a href="http://www.rpiblog.com/search/label/Programming">Programming</a></li>
+<li><a href="http://www.rpiblog.com/search/label/ssh">SSH</a></li>
+</ul>
+</li>
+</ul>
+<div class="clear"></div>
+</div><!-- /#navbarsecond -->
+</header>
+<div id="main" role="main">
+<div id="content">
+<div class="main section" id="main"><div class="widget Blog" id="Blog1">
+<h3 class="category_link">
+</h3>
+<h1 class="title">
+<a href="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi.htm">Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi</a>
+</h1>
+<div class="col_main">
+<div class="post-meta">
+     									 Posted by Rahul Kar
+<span class="separator">×</span>
+5:43 AM
+</div>
+<div>
+<div class="entry">
+<div dir="ltr" style="text-align: left;" trbidi="on">
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://4.bp.blogspot.com/-ht70F6CvLDw/UJkslkW2jRI/AAAAAAAAASg/hahYeQIYiR8/s1600/DHT11+raspberry+pi.jpg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img alt="interfacing DHT11 with raspberry pi" border="0" height="200" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/DHT11+raspberry+pi.jpg" title="DHT11 with raspberry pi" width="198"></a></div>
+DHT11 is a 4 pin sensor which can measure temperatures ranging from 0-50°C &amp;&nbsp;relative humidity ranging from 20-95%.The sensor uses its own&nbsp;proprietary&nbsp;1-wire&nbsp;protocol to&nbsp;communicate&nbsp;with Raspberry Pi and runs from 3.3V-5V. The&nbsp;timings must be precise and&nbsp;according&nbsp;to the datasheet of the sensor.<br>
+<br>
+Raspberry Pi initiates the data transmission process by pulling the data bus low for about 18 ms and keeps it <b>HIGH</b> for about 20-40 μs before releasing it.Subsequently, the sensor responds to the Pi's data transfer request by &nbsp;pulling the data bus <b>LOW</b> for 80 μs followed by 80 μs of <b>HIGH</b>.At this point Pi is ready to receive data from the sensor.Data is sent in packet of&nbsp;40 bits (5 bytes) via the data line with the most significant bit at the beginning.<br>
+<br>
+Data is&nbsp;transmitted&nbsp;in the following order:- Integer Part of Relative Humidity---&gt;Decimal Part of Relative Humidity---&gt;Integer Part of Temperature---&gt;Decimal Part of Temperature---&gt;&nbsp;Checksum. Checksum&nbsp;consists the last 8 bits of each&nbsp;part.&nbsp;Transmission&nbsp;of '0' &amp; '1' is done by varying the width of the pulse.For transmitting '0' the data bus is held <b>HIGH</b> for 26-28μs, and 70μs for transmitting '1'.A delay of 50μs(<b>LOW)</b> is introduced before any new data bit is transmitted.After the transmission of last data-bit&nbsp;the data line is held&nbsp;<b>LOW</b> for 50μs and released.<br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="http://1.bp.blogspot.com/-_sMwYSZMGLw/UJpY2RYIA9I/AAAAAAAAAS0/rJ9ZQwZ3IfM/s1600/DHT11+timing+diagram.jpg" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img alt="DHT11 sensor timing states" border="0" height="208" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/DHT11+timing+diagram.jpg" title="DHT11 timing diagram" width="640"></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br></div>
+<span style="font-size: large;"><b>Circuit:-</b></span><br>
+<div class="separator" style="clear: both; text-align: center;">
+<span style="font-size: large;"><b><br></b></span></div>
+Holding the DHT11 towards you (the one with grid), the left pin is connected to VCC (pin 1).The data pin is next &nbsp;after VCC and is connected to pin 7.Next pin is NC(no connection).Finally the last pin is connected to GND(pin 25).To&nbsp;prevent random data connect&nbsp;a 10K resistor between data and VCC pin of DHT11.<br>
+<br>
+<b><span style="font-size: large;">Software:-</span></b><br>
+WiringPi which uses C like Arduino language is used to read the sensor value.&nbsp;WiringPi is maintained under GIT for ease of change tracking.If you do not have GIT installed, then under any of the Debian releases, you can install it with-<br>
+<span style="color: #0b5394;">sudo apt-get install git-core</span><br>
+<br>
+To obtain WiringPi using GIT:<br>
+<span style="color: #0b5394;">git clone git://git.drogon.net/wiringPi</span><br>
+<br>
+If you have already used the clone operation for the first time, then<br>
+<br>
+<span style="color: #0b5394;">cd wiringPi</span><br>
+<span style="color: #0b5394;">git pull origin</span><br>
+Will fetch an updated version then you can re-run the build script below.<br>
+<br>
+To build/install there is a new simplified script:<br>
+<span style="color: #0b5394;">cd wiringPi</span><br>
+<span style="color: #0b5394;">./build</span><br>
+<span style="color: #0b5394;"><br></span>
+Save the below code as temp_rh_sensor.c...<br>
+<br>
+<div class="dp-highlighter"><div class="bar"><div class="tools"><a href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html#" onclick="dp.sh.Toolbar.Command(&#39;ViewSource&#39;,this);return false;">view plain</a><a href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html#" onclick="dp.sh.Toolbar.Command(&#39;PrintSource&#39;,this);return false;">print</a><a href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html#" onclick="dp.sh.Toolbar.Command(&#39;About&#39;,this);return false;">?</a></div></div><ol class="dp-cpp"><li class="alt"><span><span class="preprocessor">#include&nbsp;&lt;wiringPi.h&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="preprocessor">#include&nbsp;&lt;stdio.h&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="preprocessor">#include&nbsp;&lt;stdlib.h&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="preprocessor">#include&nbsp;&lt;stdint.h&gt;</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="preprocessor">#define&nbsp;MAX_TIME&nbsp;85</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span><span class="preprocessor">#define&nbsp;DHT11PIN&nbsp;7</span><span>&nbsp;&nbsp;</span></span></li><li class="alt"><span><span class="datatypes">int</span><span>&nbsp;dht11_val[5]={0,0,0,0,0};&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="keyword">void</span><span>&nbsp;dht11_read_val()&nbsp;&nbsp;</span></span></li><li class=""><span>{&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;uint8_t&nbsp;lststate=HIGH;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;uint8_t&nbsp;counter=0;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;uint8_t&nbsp;j=0,i;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;<span class="datatypes">float</span><span>&nbsp;farenheit;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">for</span><span>(i=0;i&lt;5;i++)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dht11_val[i]=0;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;pinMode(DHT11PIN,OUTPUT);&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;digitalWrite(DHT11PIN,LOW);&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;delay(18);&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;digitalWrite(DHT11PIN,HIGH);&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;delayMicroseconds(40);&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;pinMode(DHT11PIN,INPUT);&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">for</span><span>(i=0;i&lt;MAX_TIME;i++)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;counter=0;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span><span>(digitalRead(DHT11PIN)==lststate){&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;counter++;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delayMicroseconds(1);&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>(counter==255)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;lststate=digitalRead(DHT11PIN);&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>(counter==255)&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">break</span><span>;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;top&nbsp;3&nbsp;transistions&nbsp;are&nbsp;ignored</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>((i&gt;=4)&amp;&amp;(i%2==0)){&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dht11_val[j/8]&lt;&lt;=1;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>(counter&gt;16)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dht11_val[j/8]|=1;&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j++;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;<span class="comment">//&nbsp;verify&nbsp;cheksum&nbsp;and&nbsp;print&nbsp;the&nbsp;verified&nbsp;data</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">if</span><span>((j&gt;=40)&amp;&amp;(dht11_val[4]==((dht11_val[0]+dht11_val[1]+dht11_val[2]+dht11_val[3])&amp;&nbsp;0xFF)))&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;farenheit=dht11_val[2]*9./5.+32;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;printf(<span class="string">"Humidity&nbsp;=&nbsp;%d.%d&nbsp;%%&nbsp;Temperature&nbsp;=&nbsp;%d.%d&nbsp;*C&nbsp;(%.1f&nbsp;*F)\n"</span><span>,dht11_val[0],dht11_val[1],dht11_val[2],dht11_val[3],farenheit);&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">else</span><span>&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;printf(<span class="string">"Invalid&nbsp;Data!!\n"</span><span>);&nbsp;&nbsp;</span></span></li><li class="alt"><span>}&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;</span></li><li class="alt"><span><span class="datatypes">int</span><span>&nbsp;main(</span><span class="keyword">void</span><span>)&nbsp;&nbsp;</span></span></li><li class=""><span>{&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;printf(<span class="string">"Interfacing&nbsp;Temperature&nbsp;and&nbsp;Humidity&nbsp;Sensor&nbsp;(DHT11)&nbsp;With&nbsp;Raspberry&nbsp;Pi\n"</span><span>);&nbsp;&nbsp;</span></span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">if</span><span>(wiringPiSetup()==-1)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;exit(1);&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;<span class="keyword">while</span><span>(1)&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;{&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dht11_read_val();&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delay(3000);&nbsp;&nbsp;</span></li><li class=""><span>&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;0;&nbsp;&nbsp;</span></span></li><li class=""><span>}&nbsp;&nbsp;</span></li></ol></div><pre class="cpp" name="code" style="display: none;">#include &lt;wiringPi.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdint.h&gt;
+#define MAX_TIME 85
+#define DHT11PIN 7
+int dht11_val[5]={0,0,0,0,0};
+
+void dht11_read_val()
+{
+&nbsp; uint8_t lststate=HIGH;
+&nbsp; uint8_t counter=0;
+&nbsp; uint8_t j=0,i;
+&nbsp; float farenheit;
+&nbsp; for(i=0;i&lt;5;i++)
+     dht11_val[i]=0;
+  pinMode(DHT11PIN,OUTPUT);
+&nbsp; digitalWrite(DHT11PIN,LOW);
+&nbsp; delay(18);
+&nbsp; digitalWrite(DHT11PIN,HIGH);
+&nbsp; delayMicroseconds(40);
+&nbsp; pinMode(DHT11PIN,INPUT);
+&nbsp; for(i=0;i&lt;MAX_TIME;i++)
+&nbsp; {
+&nbsp; &nbsp; counter=0;
+&nbsp; &nbsp; while(digitalRead(DHT11PIN)==lststate){
+&nbsp; &nbsp; &nbsp; counter++;
+&nbsp; &nbsp; &nbsp; delayMicroseconds(1);
+&nbsp; &nbsp; &nbsp; if(counter==255)
+&nbsp; &nbsp; &nbsp; &nbsp; break;
+&nbsp; &nbsp; }
+&nbsp; &nbsp; lststate=digitalRead(DHT11PIN);
+&nbsp; &nbsp; if(counter==255)
+       break;
+&nbsp; &nbsp; // top 3 transistions are ignored
+&nbsp; &nbsp; if((i&gt;=4)&amp;&amp;(i%2==0)){
+&nbsp; &nbsp; &nbsp; dht11_val[j/8]&lt;&lt;=1;
+&nbsp; &nbsp; &nbsp; if(counter&gt;16)
+&nbsp; &nbsp; &nbsp; &nbsp; dht11_val[j/8]|=1;
+&nbsp; &nbsp; &nbsp; j++;
+&nbsp; &nbsp; }
+&nbsp; }
+&nbsp; // verify cheksum and print the verified data
+&nbsp; if((j&gt;=40)&amp;&amp;(dht11_val[4]==((dht11_val[0]+dht11_val[1]+dht11_val[2]+dht11_val[3])&amp; 0xFF)))
+&nbsp; {
+&nbsp; &nbsp; farenheit=dht11_val[2]*9./5.+32;
+&nbsp; &nbsp; printf("Humidity = %d.%d %% Temperature = %d.%d *C (%.1f *F)\n",dht11_val[0],dht11_val[1],dht11_val[2],dht11_val[3],farenheit);
+&nbsp; }
+&nbsp; else
+&nbsp; &nbsp; printf("Invalid Data!!\n");
+}
+
+int main(void)
+{
+&nbsp; printf("Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi\n");
+&nbsp; if(wiringPiSetup()==-1)
+&nbsp; &nbsp; exit(1);
+&nbsp; while(1)
+&nbsp; {
+&nbsp; &nbsp; &nbsp;dht11_read_val();
+&nbsp; &nbsp; &nbsp;delay(3000);
+&nbsp; }
+&nbsp; return 0;
+}</pre>
+<div>
+<br></div>
+<div>
+Compile&nbsp;the code as...</div>
+<div>
+<div>
+<span style="color: #0b5394;">gcc -o sensor&nbsp;temp_rh_sensor.c -L/usr/local/lib -lwiringPi</span></div>
+<div>
+<span style="color: #0b5394;"><br></span></div>
+<div>
+Now execute it...</div>
+<div>
+<span style="color: #0b5394;">sudo ./sensor</span></div>
+</div>
+<div>
+<span style="color: #0b5394;"><br></span></div>
+<div>
+<span style="color: #38761d;">[ Humidity = 87.0 % Temperature = 32.2 *C (90.0 *F) ]</span></div>
+</div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="tag_list">
+									     Tags: 
+									     						 
+									 </div>
+</div>
+<div class="col_meta">
+<div class="prevnext">
+<a href="http://www.rpiblog.com/2012/10/running-pi-headless-with-gui-part3.html" id="Blog1_blog-pager-older-link" title="Older Post">« Previous</a>
+<span class="separator">×</span>
+<a href="http://www.rpiblog.com/2012/11/pwm-on-raspberry-pi.html" id="Blog1_blog-pager-newer-link" title="Newer Post">Next »</a>
+</div>
+<div class="share_box">
+<h3>Share</h3>
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_facebook_like at300b" fb:like:layout="button_count"><div class="fb-like fb_iframe_widget" data-ref=".UzmpYzSPNJs.like" data-layout="button_count" data-show_faces="false" data-action="like" data-width="90" data-font="arial" data-href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html" data-send="false" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;font=arial&amp;href=http%3A%2F%2Fwww.rpiblog.com%2F2012%2F11%2Finterfacing-temperature-and-humidity.html&amp;layout=button_count&amp;locale=en_US&amp;ref=.UzmpYzSPNJs.like&amp;sdk=joey&amp;send=false&amp;show_faces=false&amp;width=90"><span style="vertical-align: bottom; width: 78px; height: 20px;"><iframe name="f3809ecdc" width="90px" height="1000px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like Facebook Social Plugin" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/like.htm" style="border: none; visibility: visible; width: 78px; height: 20px;" class=""></iframe></span></div></a>
+<a class="addthis_button_tweet at300b"><iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/tweet_button.1395870373.htm" class="twitter-share-button twitter-tweet-button twitter-count-horizontal" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 110px; height: 20px;"></iframe></a>
+<a class="addthis_button_pinterest_pinit at300b"><span class="at_PinItButton"></span></a>
+<a class="addthis_counter addthis_pill_style" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html#" style="display: inline-block;"><a class="atc_s addthis_button_compact"><span></span></a><a class="addthis_button_expanded" target="_blank" title="View more services" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html#"></a></a>
+<div class="atclear"></div></div>
+<script src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/addthis_widget.js" type="text/javascript"></script><div id="_atssh" style="visibility: hidden; height: 1px; width: 1px; position: absolute; z-index: 100000;"><iframe id="_atssh975" title="AddThis utility frame" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/sh152.htm" style="height: 1px; width: 1px; position: absolute; z-index: 100000; border: 0px; left: 0px; top: 0px;"></iframe></div><script type="text/javascript" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/core126.js"></script>
+</div>
+<div class="related_posts">
+<h3 class="title">Related Posts</h3>
+<ul>
+<script type="text/javascript"> removeRelatedDuplicates(); printRelatedLabels();  </script>
+</ul><div class="clear"></div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div id="comments">
+<div id="comments">
+<a name="comments"></a>
+<h3>
+10
+comments
+</h3>
+<div class="comments-content">
+<script async="async" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/comments.js" type="text/javascript"></script>
+<script type="text/javascript">
+    (function() {
+      var items = [{'id': '5835980328629665747', 'body': 'I dont have a \46quot;10K ohm resistor\46quot; and testing your code says invalid data, do I need to have that resistor ?', 'timestamp': '1352465827726', 'permalink': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment\0751352465827726#c5835980328629665747', 'author': {'name': 'deepesh-agarwal', 'avatarUrl': 'http://img1.blogblog.com/img/openid16-rounded.gif', 'profileUrl': 'http://deepesh-agarwal.myopenid.com/'}, 'displayTime': 'November 9, 2012 at 4:57 AM', 'deleteclass': 'item-control blog-admin pid-1814730531'}, {'id': '5622624517397356724', 'body': 'Without the 10K resistor data may get corrupted as the pin is left floating.You can try with 47K or 100K as it merely pulls the data bus to GND. You are getting invalid data because of failed check-sum verification.', 'timestamp': '1352468347573', 'permalink': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment\0751352468347573#c5622624517397356724', 'author': {'name': 'Rahul Kar', 'avatarUrl': '//lh5.googleusercontent.com/-s_kprdXeC0o/AAAAAAAAAAI/AAAAAAAAASY/bNqP3T1enoA/s512-c/photo.jpg', 'profileUrl': 'http://www.blogger.com/profile/05104104732363932086'}, 'displayTime': 'November 9, 2012 at 5:39 AM', 'deleteclass': 'item-control blog-admin pid-1678020939'}, {'id': '8830960459616654609', 'body': 'Hi Rahul,\74br /\76\74br /\76The data is infact seems to be getting corrupted as after removing the checksum verification I am getting :\74br /\76\74br /\76Humidity \75 0.0 % Temperature \75 0.0 *C (32.0 *F)\74br /\76\74br /\76This is my very first electronics venture, it took me almost a month to get DHT11 from China and at it would be hard to get an resistor in my small town :(\74br /\76\74br /\76Thanks \74br /\076', 'timestamp': '1352474831535', 'permalink': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment\0751352474831535#c8830960459616654609', 'author': {'name': 'deepesh-agarwal', 'avatarUrl': 'http://img1.blogblog.com/img/openid16-rounded.gif', 'profileUrl': 'http://deepesh-agarwal.myopenid.com/'}, 'displayTime': 'November 9, 2012 at 7:27 AM', 'deleteclass': 'item-control blog-admin pid-1814730531'}, {'id': '3102857723698011430', 'body': 'Works perfect! Thank you!', 'timestamp': '1357326984182', 'permalink': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment\0751357326984182#c3102857723698011430', 'author': {'name': 'Kamil Figiela', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/18045352429141223824'}, 'displayTime': 'January 4, 2013 at 11:16 AM', 'deleteclass': 'item-control blog-admin pid-634193838'}, {'id': '5517293224772776096', 'body': 'Hello, good explanation!\74br /\76\74br /\76If I need to change the pin number to 18, what line do I have to change?\74br /\76\74br /\76This one?\74br /\76#define DHT11PIN 7 -\46gt; #define DHT11PIN 18\74br /\76\74br /\76\74br /\76If yes, the raspi crash..', 'timestamp': '1366404442777', 'permalink': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment\0751366404442777#c5517293224772776096', 'author': {'name': 'Vitor Carvalho', 'avatarUrl': '//lh6.googleusercontent.com/-IKLM-RZLQSY/AAAAAAAAAAI/AAAAAAAAAIU/e73Mus-CJmI/s512-c/photo.jpg', 'profileUrl': 'http://www.blogger.com/profile/14735207415939013348'}, 'displayTime': 'April 19, 2013 at 1:47 PM', 'deleteclass': 'item-control blog-admin pid-565970689'}, {'id': '9100234104772813160', 'body': 'thanks for the article, this works nicely!\74br /\76What I\46#39;m trying to do is to connect second DTH11 sensor. What I\46#39;ve noticed it only works with pin7 and when I try to connect it to a different pin - it doesn\46#39;t give me data (of course I\46#39;ve updated C code to use different pin). Do you know if there are any restrictions on what pin to use?', 'timestamp': '1367272919720', 'permalink': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment\0751367272919720#c9100234104772813160', 'author': {'name': 'Rob', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/07343991600292713109'}, 'displayTime': 'April 29, 2013 at 3:01 PM', 'deleteclass': 'item-control blog-admin pid-504117740'}, {'id': '72771041289165386', 'body': 'Hi yall,\74br /\76\74br /\76nice work, but I\46#39;m running into some weird issue. I try to run sensor to feed data to some rrd file, so I have to extract the payload from sensors\46#39; output. Just executed sensor give me fine continously output, but as soon as I try to process the output by piping to awk, grep or comparables I end up with no output at all, I also can\46#39;t redirect the output to a file.\74br /\76\74br /\76The interesting part is, if I redirect stderr to /dev/null I\46#39;m presented data:\74br /\76\74br /\76pi@raspberrypi ~ $ sudo sensor 2\46gt; /dev/null \74br /\76Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi\74br /\76Humidity \75 38.0 % Temperature \75 20.0 *C (68.0 *F)\74br /\76Humidity \75 38.0 % Temperature \75 20.0 *C (68.0 *F)\74br /\76\74br /\76If I redirect stdout to /dev/null I end up with nothing, so the output obviously goes to stdout:\74br /\76\74br /\76pi@raspberrypi ~ $ sudo sensor 1\46gt; /dev/null\74br /\76*nothing*\74br /\76\74br /\76However, redirecting stdout to a file is unsuccessful as well:\74br /\76\74br /\76pi@raspberrypi ~ $ sudo sensor 1\46gt; out.file\74br /\76\74br /\76Strange...', 'timestamp': '1370100129352', 'permalink': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment\0751370100129352#c72771041289165386', 'author': {'name': 'gzvtzitzitzuixctiz', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/02981351432456098845'}, 'displayTime': 'June 1, 2013 at 8:22 AM', 'deleteclass': 'item-control blog-admin pid-1103548966'}, {'id': '5270298191795819272', 'body': 'Do you have any code to get the readings from the DHT11 sensor in Python. I have ordered a sensor and will be connecting it to my raspberry pi.\74br /\76\74br /\76Thanks.', 'timestamp': '1372051502699', 'permalink': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment\0751372051502699#c5270298191795819272', 'author': {'name': 'imran', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/15464380243981547113'}, 'displayTime': 'June 23, 2013 at 10:25 PM', 'deleteclass': 'item-control blog-admin pid-1456107137'}, {'id': '4641916937543502012', 'body': 'Nice tutorial. Got it to work , but even though I have the resistor accross the VCC and Data pins i still get intermittent invalid data, change from a 10k to a 47k resistor but results are the same.  any ideas as to what may be at fault?\74br /\76cheers, fitzroy.\74br /\076', 'timestamp': '1384999733411', 'permalink': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment\0751384999733411#c4641916937543502012', 'author': {'name': 'Fitzroy Rampersad', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/07186831442927140806'}, 'displayTime': 'November 20, 2013 at 6:08 PM', 'deleteclass': 'item-control blog-admin pid-219260256'}, {'id': '8756094995151363746', 'body': 'Hello is your code open source an can i use it in my own project?', 'timestamp': '1387392386509', 'permalink': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment\0751387392386509#c8756094995151363746', 'author': {'name': 'sparkäfer', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/08685123537020496475'}, 'displayTime': 'December 18, 2013 at 10:46 AM', 'deleteclass': 'item-control blog-admin pid-1796272393'}];
+      var msgs = {'loadMore': 'Load more...', 'loading': 'Loading...', 'loaded': 'No more!', 'addComment': 'Add comment', 'reply': 'Reply', 'delete': 'Delete'};
+      var config = {'blogId': '4643957133557038581', 'postId': '6456280256894438960', 'feed': 'http://www.rpiblog.com/feeds/6456280256894438960/comments/default', 'authorName': 'Rahul Kar', 'authorUrl': 'http://www.blogger.com/profile/05104104732363932086', 'baseUri': 'http://www.blogger.com', 'maxThreadDepth': 2};
+
+// <![CDATA[
+      var cursor = null;
+      if (items && items.length > 0) {
+        cursor = parseInt(items[items.length - 1].timestamp) + 1;
+      }
+
+      var bodyFromEntry = function(entry) {
+        if (entry.gd$extendedProperty) {
+          for (var k in entry.gd$extendedProperty) {
+            if (entry.gd$extendedProperty[k].name == 'blogger.contentRemoved') {
+              return '<span class="deleted-comment">' + entry.content.$t + '</span>';
+            }
+          }
+        }
+        return entry.content.$t;
+      }
+
+      var parse = function(data) {
+        cursor = null;
+        var comments = [];
+        if (data && data.feed && data.feed.entry) {
+          for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
+            var comment = {};
+            // comment ID, parsed out of the original id format
+            var id = /blog-(\d+).post-(\d+)/.exec(entry.id.$t);
+            comment.id = id ? id[2] : null;
+            comment.body = bodyFromEntry(entry);
+            comment.timestamp = Date.parse(entry.published.$t) + '';
+            if (entry.author && entry.author.constructor === Array) {
+              var auth = entry.author[0];
+              if (auth) {
+                comment.author = {
+                  name: (auth.name ? auth.name.$t : undefined),
+                  profileUrl: (auth.uri ? auth.uri.$t : undefined),
+                  avatarUrl: (auth.gd$image ? auth.gd$image.src : undefined)
+                };
+              }
+            }
+            if (entry.link) {
+              if (entry.link[2]) {
+                comment.link = comment.permalink = entry.link[2].href;
+              }
+              if (entry.link[3]) {
+                var pid = /.*comments\/default\/(\d+)\?.*/.exec(entry.link[3].href);
+                if (pid && pid[1]) {
+                  comment.parentId = pid[1];
+                }
+              }
+            }
+            comment.deleteclass = 'item-control blog-admin';
+            if (entry.gd$extendedProperty) {
+              for (var k in entry.gd$extendedProperty) {
+                if (entry.gd$extendedProperty[k].name == 'blogger.itemClass') {
+                  comment.deleteclass += ' ' + entry.gd$extendedProperty[k].value;
+                }
+              }
+            }
+            comments.push(comment);
+          }
+        }
+        return comments;
+      };
+
+      var paginator = function(callback) {
+        if (hasMore()) {
+          var url = config.feed + '?alt=json&v=2&orderby=published&reverse=false&max-results=50';
+          if (cursor) {
+            url += '&published-min=' + new Date(cursor).toISOString();
+          }
+          window.bloggercomments = function(data) {
+            var parsed = parse(data);
+            cursor = parsed.length < 50 ? null
+                : parseInt(parsed[parsed.length - 1].timestamp) + 1
+            callback(parsed);
+            window.bloggercomments = null;
+          }
+          url += '&callback=bloggercomments';
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = url;
+          document.getElementsByTagName('head')[0].appendChild(script);
+        }
+      };
+      var hasMore = function() {
+        return !!cursor;
+      };
+      var getMeta = function(key, comment) {
+        if ('iswriter' == key) {
+          var matches = !!comment.author
+              && comment.author.name == config.authorName
+              && comment.author.profileUrl == config.authorUrl;
+          return matches ? 'true' : '';
+        } else if ('deletelink' == key) {
+          return config.baseUri + '/delete-comment.g?blogID='
+               + config.blogId + '&postID=' + comment.id;
+        } else if ('deleteclass' == key) {
+          return comment.deleteclass;
+        }
+        return '';
+      };
+
+      var replybox = null;
+      var replyUrlParts = null;
+      var replyParent = undefined;
+
+      var onReply = function(commentId, domId) {
+        if (replybox == null) {
+          // lazily cache replybox, and adjust to suit this style:
+          replybox = document.getElementById('comment-editor');
+          if (replybox != null) {
+            replybox.height = '250px';
+            replybox.style.display = 'block';
+            replyUrlParts = replybox.src.split('#');
+          }
+        }
+        if (replybox && (commentId !== replyParent)) {
+          document.getElementById(domId).insertBefore(replybox, null);
+          replybox.src = replyUrlParts[0]
+              + (commentId ? '&parentID=' + commentId : '')
+              + '#' + replyUrlParts[1];
+          replyParent = commentId;
+        }
+      };
+
+      var hash = (window.location.hash || '#').substring(1);
+      var startThread, targetComment;
+      if (/^comment-form_/.test(hash)) {
+        startThread = hash.substring('comment-form_'.length);
+      } else if (/^c[0-9]+$/.test(hash)) {
+        targetComment = hash.substring(1);
+      }
+
+      // Configure commenting API:
+      var configJso = {
+        'maxDepth': config.maxThreadDepth
+      };
+      var provider = {
+        'id': config.postId,
+        'data': items,
+        'loadNext': paginator,
+        'hasMore': hasMore,
+        'getMeta': getMeta,
+        'onReply': onReply,
+        'rendered': true,
+        'initComment': targetComment,
+        'initReplyThread': startThread,
+        'config': configJso,
+        'messages': msgs
+      };
+
+      var render = function() {
+        if (window.goog && window.goog.comments) {
+          var holder = document.getElementById('comment-holder');
+          window.goog.comments.render(holder, provider);
+        }
+      };
+
+      // render now, or queue to render when library loads:
+      if (window.goog && window.goog.comments) {
+        render();
+      } else {
+        window.goog = window.goog || {};
+        window.goog.comments = window.goog.comments || {};
+        window.goog.comments.loadQueue = window.goog.comments.loadQueue || [];
+        window.goog.comments.loadQueue.push(render);
+      }
+    })();
+// ]]>
+</script>
+<div id="comment-holder">
+
+<div id="bc_0_11C" kind="c"><div id="bc_0_11CT"><div id="bc_0_10T" class="comment-thread" kind="r" t="0" u="0"><ol id="bc_0_10TB"><li id="bc_0_0B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/openid36-rounded.png"></div><div id="c5835980328629665747" class="comment-block"><div id="bc_0_0M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://deepesh-agarwal.myopenid.com/">deepesh-agarwal</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment=1352465827726#c5835980328629665747">November 9, 2012 at 4:57 AM</a></span></div><p id="bc_0_0MC" class="comment-content">I dont have a "10K ohm resistor" and testing your code says invalid data, do I need to have that resistor ?</p><span id="bc_0_0MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1814730531"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=4643957133557038581&postID=5835980328629665747">Delete</a></span></span></div><div id="bc_0_0BR" class="comment-replies"></div><div id="bc_0_0B_box" class="comment-replybox-single"></div></li><li id="bc_0_1B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/photo.jpg"></div><div id="c5622624517397356724" class="comment-block"><div id="bc_0_1M" class="comment-header" kind="m"><cite class="user blog-author"><a rel="nofollow" href="http://www.blogger.com/profile/05104104732363932086">Rahul Kar</a></cite><span class="icon user blog-author"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment=1352468347573#c5622624517397356724">November 9, 2012 at 5:39 AM</a></span></div><p id="bc_0_1MC" class="comment-content">Without the 10K resistor data may get corrupted as the pin is left floating.You can try with 47K or 100K as it merely pulls the data bus to GND. You are getting invalid data because of failed check-sum verification.</p><span id="bc_0_1MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1678020939"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=4643957133557038581&postID=5622624517397356724">Delete</a></span></span></div><div id="bc_0_1BR" class="comment-replies"></div><div id="bc_0_1B_box" class="comment-replybox-single"></div></li><li id="bc_0_2B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/openid36-rounded.png"></div><div id="c8830960459616654609" class="comment-block"><div id="bc_0_2M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://deepesh-agarwal.myopenid.com/">deepesh-agarwal</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment=1352474831535#c8830960459616654609">November 9, 2012 at 7:27 AM</a></span></div><p id="bc_0_2MC" class="comment-content">Hi Rahul,<br><br>The data is infact seems to be getting corrupted as after removing the checksum verification I am getting :<br><br>Humidity = 0.0 % Temperature = 0.0 *C (32.0 *F)<br><br>This is my very first electronics venture, it took me almost a month to get DHT11 from China and at it would be hard to get an resistor in my small town :(<br><br>Thanks <br></p><span id="bc_0_2MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1814730531"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=4643957133557038581&postID=8830960459616654609">Delete</a></span></span></div><div id="bc_0_2BR" class="comment-replies"></div><div id="bc_0_2B_box" class="comment-replybox-single"></div></li><li id="bc_0_3B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/b36-rounded.png"></div><div id="c3102857723698011430" class="comment-block"><div id="bc_0_3M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/18045352429141223824">Kamil Figiela</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment=1357326984182#c3102857723698011430">January 4, 2013 at 11:16 AM</a></span></div><p id="bc_0_3MC" class="comment-content">Works perfect! Thank you!</p><span id="bc_0_3MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-634193838"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=4643957133557038581&postID=3102857723698011430">Delete</a></span></span></div><div id="bc_0_3BR" class="comment-replies"></div><div id="bc_0_3B_box" class="comment-replybox-single"></div></li><li id="bc_0_4B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/photo(1).jpg"></div><div id="c5517293224772776096" class="comment-block"><div id="bc_0_4M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/14735207415939013348">Vitor Carvalho</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment=1366404442777#c5517293224772776096">April 19, 2013 at 1:47 PM</a></span></div><p id="bc_0_4MC" class="comment-content">Hello, good explanation!<br><br>If I need to change the pin number to 18, what line do I have to change?<br><br>This one?<br>#define DHT11PIN 7 -&gt; #define DHT11PIN 18<br><br><br>If yes, the raspi crash..</p><span id="bc_0_4MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-565970689"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=4643957133557038581&postID=5517293224772776096">Delete</a></span></span></div><div id="bc_0_4BR" class="comment-replies"></div><div id="bc_0_4B_box" class="comment-replybox-single"></div></li><li id="bc_0_5B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/b36-rounded.png"></div><div id="c9100234104772813160" class="comment-block"><div id="bc_0_5M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/07343991600292713109">Rob</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment=1367272919720#c9100234104772813160">April 29, 2013 at 3:01 PM</a></span></div><p id="bc_0_5MC" class="comment-content">thanks for the article, this works nicely!<br>What I'm trying to do is to connect second DTH11 sensor. What I've noticed it only works with pin7 and when I try to connect it to a different pin - it doesn't give me data (of course I've updated C code to use different pin). Do you know if there are any restrictions on what pin to use?</p><span id="bc_0_5MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-504117740"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=4643957133557038581&postID=9100234104772813160">Delete</a></span></span></div><div id="bc_0_5BR" class="comment-replies"></div><div id="bc_0_5B_box" class="comment-replybox-single"></div></li><li id="bc_0_6B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/b36-rounded.png"></div><div id="c72771041289165386" class="comment-block"><div id="bc_0_6M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/02981351432456098845">gzvtzitzitzuixctiz</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment=1370100129352#c72771041289165386">June 1, 2013 at 8:22 AM</a></span></div><p id="bc_0_6MC" class="comment-content">Hi yall,<br><br>nice work, but I'm running into some weird issue. I try to run sensor to feed data to some rrd file, so I have to extract the payload from sensors' output. Just executed sensor give me fine continously output, but as soon as I try to process the output by piping to awk, grep or comparables I end up with no output at all, I also can't redirect the output to a file.<br><br>The interesting part is, if I redirect stderr to /dev/null I'm presented data:<br><br>pi@raspberrypi ~ $ sudo sensor 2&gt; /dev/null <br>Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi<br>Humidity = 38.0 % Temperature = 20.0 *C (68.0 *F)<br>Humidity = 38.0 % Temperature = 20.0 *C (68.0 *F)<br><br>If I redirect stdout to /dev/null I end up with nothing, so the output obviously goes to stdout:<br><br>pi@raspberrypi ~ $ sudo sensor 1&gt; /dev/null<br>*nothing*<br><br>However, redirecting stdout to a file is unsuccessful as well:<br><br>pi@raspberrypi ~ $ sudo sensor 1&gt; out.file<br><br>Strange...</p><span id="bc_0_6MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1103548966"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=4643957133557038581&postID=72771041289165386">Delete</a></span></span></div><div id="bc_0_6BR" class="comment-replies"></div><div id="bc_0_6B_box" class="comment-replybox-single"></div></li><li id="bc_0_7B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/b36-rounded.png"></div><div id="c5270298191795819272" class="comment-block"><div id="bc_0_7M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/15464380243981547113">imran</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment=1372051502699#c5270298191795819272">June 23, 2013 at 10:25 PM</a></span></div><p id="bc_0_7MC" class="comment-content">Do you have any code to get the readings from the DHT11 sensor in Python. I have ordered a sensor and will be connecting it to my raspberry pi.<br><br>Thanks.</p><span id="bc_0_7MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1456107137"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=4643957133557038581&postID=5270298191795819272">Delete</a></span></span></div><div id="bc_0_7BR" class="comment-replies"></div><div id="bc_0_7B_box" class="comment-replybox-single"></div></li><li id="bc_0_8B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/b36-rounded.png"></div><div id="c4641916937543502012" class="comment-block"><div id="bc_0_8M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/07186831442927140806">Fitzroy Rampersad</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment=1384999733411#c4641916937543502012">November 20, 2013 at 6:08 PM</a></span></div><p id="bc_0_8MC" class="comment-content">Nice tutorial. Got it to work , but even though I have the resistor accross the VCC and Data pins i still get intermittent invalid data, change from a 10k to a 47k resistor but results are the same.  any ideas as to what may be at fault?<br>cheers, fitzroy.<br></p><span id="bc_0_8MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-219260256"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=4643957133557038581&postID=4641916937543502012">Delete</a></span></span></div><div id="bc_0_8BR" class="comment-replies"></div><div id="bc_0_8B_box" class="comment-replybox-single"></div></li><li id="bc_0_9B" class="comment" kind="b"><div class="avatar-image-container"><img src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/b36-rounded.png"></div><div id="c8756094995151363746" class="comment-block"><div id="bc_0_9M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/08685123537020496475">sparkäfer</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html?showComment=1387392386509#c8756094995151363746">December 18, 2013 at 10:46 AM</a></span></div><p id="bc_0_9MC" class="comment-content">Hello is your code open source an can i use it in my own project?</p><span id="bc_0_9MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1796272393"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=4643957133557038581&postID=8756094995151363746">Delete</a></span></span></div><div id="bc_0_9BR" class="comment-replies"></div><div id="bc_0_9B_box" class="comment-replybox-single"></div></li></ol><div id="bc_0_10I" class="continue" kind="ci" style="display: none;"><a href="javascript:;" target="_self">Add comment</a></div><div id="bc_0_10T_box" class="comment-replybox-thread"><iframe allowtransparency="true" class="blogger-iframe-colorize blogger-comment-from-post" frameborder="0" height="260px" id="comment-editor" name="comment-editor" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/comment-iframe.htm" width="100%" style="display: block;"></iframe></div><div id="bc_0_10L" class="loadmore loaded" kind="rb"><a href="javascript:;" target="_self">Load more...</a></div></div></div></div></div>
+</div>
+<p class="comment-footer">
+</p><div class="comment-form">
+<a name="comment-form"></a>
+<p>
+</p>
+<a href="https://www.blogger.com/comment-iframe.g?blogID=4643957133557038581&postID=6456280256894438960&blogspotRpcToken=8373794" id="comment-editor-src"></a>
+
+<script type="text/javascript" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/3031739017-comment_from_post_iframe.js"></script>
+<script type="text/javascript">
+      BLOG_CMT_createIframe('https://www.blogger.com/rpc_relay.html', '01377162044970935526');
+    </script>
+</div>
+<p></p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</div><!-- /#content -->
+<div id="sidebar">
+<div class="widget widget_search" id="search-2">
+<div class="widget_content">
+<form action="http://www.rpiblog.com/search" id="searchform" method="get">
+<fieldset>
+<input id="s" name="s" onblur="if (this.value == &#39;&#39;) {this.value = &#39;Search&#39;;}" onfocus="if (this.value == &#39;Search&#39;) {this.value = &#39;&#39;;}" type="text" value="Search">
+<input id="searchsubmit" type="submit" value="Search">
+</fieldset>
+</form>
+<div class="clear"></div>
+</div>
+</div>
+<div class="widget feature-posts section" id="wpzoom-feature-posts-3"><div class="widget HTML" id="HTML4">
+<div class="widget-content">
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="SEASZNGQHA4TJ">
+<input type="image" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/btn_giftCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+<img alt="" border="0" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/pixel.gif" width="1" height="1">
+</form>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=4643957133557038581&widgetType=HTML&widgetId=HTML4&action=editWidget&sectionId=wpzoom-feature-posts-3" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML4&quot;));" target="configHTML4" title="Edit">
+<img alt="" height="18" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget Image" id="Image1">
+<div class="widget-content">
+<a href="http://fabtolab.com/index.php?route=product%2Fproduct&product_id=80&tracking=50fa32d931058">
+<img alt="" height="140" id="Image1_img" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/expeyes_junior.jpg" width="260">
+</a>
+<br>
+<span class="caption">Buy expEYES for Raspberry Pi</span>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=4643957133557038581&widgetType=Image&widgetId=Image1&action=editWidget&sectionId=wpzoom-feature-posts-3" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;Image1&quot;));" target="configImage1" title="Edit">
+<img alt="" height="18" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML3">
+<div class="widget-content">
+<script type="text/javascript">
+<!--
+//I. Array of banner that will randomly appear
+
+var randompic = new Array ( );
+randompic[0] = "https://lh3.googleusercontent.com/-Y265379mPns/UVWoY0f94pI/AAAAAAAAAlI/857Jrnk2x70/s250/expeyes+%28Custom%29.jpg";
+randompic[1] = "https://lh3.googleusercontent.com/-Pind5QPYWys/UQvoK4qu0UI/AAAAAAAAAjA/ts6I2Q5w8KU/s257/HC-SR04-sm-900x700+%28Custom%29.jpg";
+randompic[2] = "https://lh4.googleusercontent.com/-mgaaKUUlKlA/UQvqCDMw5zI/AAAAAAAAAjM/jEWnPpRr8kA/s265/P8X32A-D40-L-900x700%2520%2528Custom%2529.jpg";
+randompic[3] = "https://lh3.googleusercontent.com/-hG1ar8X_KDc/UQvtPF5LcLI/AAAAAAAAAj4/P90JMAljvEw/s268/Raspberry_Pi_2-900x700%2520%2528Custom%2529%2520%25282%2529.jpg";
+
+//II. Array of links that will randomly appear
+
+var randomlink = new Array ( );
+randomlink[0] = "fabtolab.com/index.php?route=product/product&product_id=80&tracking=50fa32d931058";
+randomlink[1] = "fabtolab.com/index.php?route=product/product&product_id=130&tracking=50fa32d931058";
+randomlink[2] = "fabtolab.com/index.php?route=product/product&product_id=63&tracking=50fa32d931058";
+randomlink[3] = "fabtolab.com/index.php?route=product/product&product_id=188&tracking=50fa32d931058";
+
+//III. function to generate number from 0 to n
+
+function randomzero (n)
+{
+  return ( Math.floor ( Math.random ( )*0.9999999999999999* (n + 1)) );
+}
+
+//IV. assign any random number from 0 to 2 to x.
+
+x = randomzero(3);
+
+//V. display the image
+document.write('<a href="http://' + randomlink[x] + '" rel="nofollow">');
+document.write('<img alt="random ad banner" src="' + randompic[x] + '"/>');
+document.write('</a>');
+//-->
+</script><a href="http://fabtolab.com/index.php?route=product/product&product_id=130&tracking=50fa32d931058" rel="nofollow"><img alt="random ad banner" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/HC-SR04-sm-900x700+(Custom).jpg"></a>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=4643957133557038581&widgetType=HTML&widgetId=HTML3&action=editWidget&sectionId=wpzoom-feature-posts-3" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML3&quot;));" target="configHTML3" title="Edit">
+<img alt="" height="18" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML2">
+<div class="widget-content">
+<script type="text/javascript">
+<!--
+//I. Array of banner that will randomly appear
+
+var randompic = new Array ( );
+randompic[0] = "https://lh3.googleusercontent.com/-8J_ZqnohFpA/Ur2tdXs46VI/AAAAAAAAAyM/vTtW7krKC5o/s250/Randy_P-900x700%2520%2528Custom%2529.jpg";
+randompic[1] = "https://lh4.googleusercontent.com/-38JjFmMtaIM/Ur2q5wvfZqI/AAAAAAAAAx8/CsUnXe2DPq8/s250/Ti_metawatch-900x700%2520%2528Custom%2529.jpg";
+randompic[2]="https://lh5.googleusercontent.com/-1kBvIzjL0Io/Ur2ZBNY_U0I/AAAAAAAAAxQ/GMdHWEOkSvE/s250/teensy3.1%2520%2528Custom%2529.jpg";
+randompic[3] = "https://lh4.googleusercontent.com/-PZlMYQON6dg/Ur2cCoN4uKI/AAAAAAAAAxk/k0gbvfrWCVs/s250/T004_android_stick-900x700%2520%2528Custom%2529.jpg";
+
+//II. Array of links that will randomly appear
+
+var randomlink = new Array ( );
+randomlink[0] = "fabtolab.com/radio/randy-ii-p?tracking=50fa32d931058";
+randomlink[1] = "fabtolab.com/consumer-electronics/wearable-technology/TI-metawatch-T2000?tracking=50fa32d931058";
+randomlink[2] = "fabtolab.com/boards/teensy/teensy-3.1?tracking=50fa32d931058";
+randomlink[3] = "fabtolab.com/android-mini-pc-stick-t004&tracking=50fa32d931058";
+
+//III. function to generate number from 0 to n
+
+function randomzero (n)
+{
+  return ( Math.floor ( Math.random ( )*0.9999999999999999* (n + 1)) );
+}
+
+//IV. assign any random number from 0 to 2 to x.
+
+x = randomzero(3);
+
+//V. display the image
+document.write('<a href="http://' + randomlink[x] + '" rel="nofollow">');
+document.write('<img alt="random ad banner" src="' + randompic[x] + '"/>');
+document.write('</a>');
+//-->
+</script><a href="http://fabtolab.com/consumer-electronics/wearable-technology/TI-metawatch-T2000?tracking=50fa32d931058" rel="nofollow"><img alt="random ad banner" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/Ti_metawatch-900x700%20%28Custom%29.jpg"></a>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=4643957133557038581&widgetType=HTML&widgetId=HTML2&action=editWidget&sectionId=wpzoom-feature-posts-3" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML2&quot;));" target="configHTML2" title="Edit">
+<img alt="" height="18" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget HTML" id="HTML7">
+<h2>Recent Posts</h2>
+<div class="widget_content">
+<ul class="feature-posts-list">
+<script>
+   		        						 document.write("<script src=\"/feeds/posts/default?max-results="+numposts3+"&orderby=published&alt=json-in-script&callback=showrecentposts3\"><\/script>");
+									 </script><script src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/default"></script><li><a href="http://www.rpiblog.com/2014/03/review-upis-uninterruptible-power.html"><img width="75" height="50" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/ph1_max.jpg"></a><a href="http://www.rpiblog.com/2014/03/review-upis-uninterruptible-power.html">[Review] UPiS - Uninterruptible Power intelligent Supply for Raspberry Pi</a> <br><small>26 Mar 2014</small> <br><div class="clear"></div></li><li><a href="http://www.rpiblog.com/2014/03/installing-oracle-jdk-8-on-raspberry-pi.html"><img width="75" height="50" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/java8.png"></a><a href="http://www.rpiblog.com/2014/03/installing-oracle-jdk-8-on-raspberry-pi.html">Installing Oracle JDK 8 on Raspberry Pi</a> <br><small>24 Mar 2014</small> <br><div class="clear"></div></li><li><a href="http://www.rpiblog.com/2014/01/8-channel-bluetooth-gpio-module.html"><img width="75" height="50" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/bluetoothgpio8_1_0.jpg"></a><a href="http://www.rpiblog.com/2014/01/8-channel-bluetooth-gpio-module.html">8 Channel Bluetooth GPIO Module</a> <br><small>06 Jan 2014</small> <br><div class="clear"></div></li><li><a href="http://www.rpiblog.com/2013/12/mega-new-year-give-away-2014.html"><img width="75" height="50" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/Gift_box_icon.png"></a><a href="http://www.rpiblog.com/2013/12/mega-new-year-give-away-2014.html">Mega New Year Give Away 2014</a> <br><small>27 Dec 2013</small> <br><div class="clear"></div></li>
+</ul>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML1">
+<div class="widget-content">
+<style>.helperbloggerFB { width: 270px; height: 150px; border-radius: 3px; position: relative; background-color:#f4f4f4; padding:5px 10px 15px 0; } .helperbloggerFB, .helperbloggerFB:before, .helperbloggerFB:after { background: #f4f4f4; border: 1px solid #ccc; } .helperbloggerFB:before, .helperbloggerFB:after { content: ""; position: absolute; bottom: -3px; left: 2px; right: 2px; height: 1px; border-top: none; } .helperbloggerFB:after { left: 4px; right: 4px; bottom: -5px; box-shadow: 0 0 2px #ccc; } </style> <br> <div class="helperbloggerFB"> <div style="height: 155px; overflow: hidden;"> <fb:like-box class=" fb_iframe_widget " data-border-color="#f4f4f4" data-header="false" data-height="179" data-show-faces="true" data-stream="false" data-width="300" href="https://www.facebook.com/Raspberry314" fb-xfbml-state="rendered" fb-iframe-plugin-query="app_id=&amp;header=false&amp;height=179&amp;href=https%3A%2F%2Fwww.facebook.com%2FRaspberry314&amp;locale=en_US&amp;sdk=joey&amp;show_faces=true&amp;stream=false&amp;width=300"><span style="vertical-align: bottom; width: 300px; height: 179px;"><iframe name="f3a4eb6404" width="300px" height="179px" frameborder="0" allowtransparency="true" scrolling="no" title="fb:like_box Facebook Social Plugin" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/like_box.htm" style="border: none; visibility: visible; width: 300px; height: 179px;" class=""></iframe></span></fb:like-box> </div> </div> <div id="fb-root" class=" fb_reset"> <div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/wTH8U0osOYl.htm" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/wTH8U0osOYl(1).htm" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div> <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk')); </script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=4643957133557038581&widgetType=HTML&widgetId=HTML1&action=editWidget&sectionId=wpzoom-feature-posts-3" onclick="return _WidgetManager._PopupConfig(document.getElementById(&quot;HTML1&quot;));" target="configHTML1" title="Edit">
+<img alt="" height="18" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/icon18_wrench_allbkg.png" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+</div><!-- /#main -->
+<div id="footer">
+<div class="widget-area">
+<div class="column section" id="footer1"></div>
+<div class="column section" id="footer2"></div>
+<div class="column last section" id="footer3"></div>
+<div class="clear"></div>
+</div><!-- /.widget-area-->
+<div class="clear"></div>
+<div class="copyright">
+<div class="left">
+    				 Copyright  2013 RPiBlog. All Rights Reserved.
+				 </div>
+<div class="right">
+<p>Site Developed By Rahul Kar </p>
+</div>
+</div><!-- /.copyright -->
+</div>
+</div><canvas style="display: none;"></canvas>
+<!-- Add-in Script for syntax highlighting -->
+<script language="javascript">
+dp.SyntaxHighlighter.BloggerMode();
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+<div class="footer section" id="footer"></div>
+<script type="text/javascript">/* CloudFlare analytics upgrade */
+</script>
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/3788961956-widgets.js"></script>
+<script type="text/javascript" src="./Raspberry Pi Blog  Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi_files/plusone.js" gapi_processed="true"></script>
+<script type="text/javascript">
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV1";window['blogger_blog_id'] = '4643957133557038581';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d4643957133557038581','//www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html','4643957133557038581');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '4643957133557038581', 'bloggerUrl': 'http://www.blogger.com', 'title': 'Raspberry Pi Blog', 'pageType': 'item', 'url': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html', 'canonicalUrl': 'http://www.rpiblog.com/2012/11/interfacing-temperature-and-humidity.html', 'canonicalHomepageUrl': 'http://www.rpiblog.com/', 'homepageUrl': 'http://www.rpiblog.com/', 'blogspotFaviconUrl': 'http://www.rpiblog.com/favicon.ico', 'enabledCommentProfileImages': true, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': 'UA-35477239-1', 'searchLabel': '', 'searchQuery': '', 'pageName': 'Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi', 'pageTitle': 'Raspberry Pi Blog: Interfacing Temperature and Humidity Sensor (DHT11) With Raspberry Pi', 'metaDescription': 'temperature and humidity sensor raspberry pi', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Raspberry Pi Blog - Atom\42 href\75\42http://www.rpiblog.com/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42Raspberry Pi Blog - RSS\42 href\75\42http://www.rpiblog.com/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42Raspberry Pi Blog - Atom\42 href\75\42http://www.blogger.com/feeds/4643957133557038581/posts/default\42 /\76\n\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Raspberry Pi Blog - Atom\42 href\75\42http://www.rpiblog.com/feeds/6456280256894438960/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'postImageThumbnailUrl': 'http://4.bp.blogspot.com/-ht70F6CvLDw/UJkslkW2jRI/AAAAAAAAASg/hahYeQIYiR8/s72-c/DHT11+raspberry+pi.jpg', 'postImageUrl': 'http://4.bp.blogspot.com/-ht70F6CvLDw/UJkslkW2jRI/AAAAAAAAASg/hahYeQIYiR8/s200/DHT11+raspberry+pi.jpg', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { var b\75window,f\75\42chrome\42,g\75\42jstiming\42,k\75\42tick\42;(function(){function d(a){this.t\75{};this.tick\75function(a,d,c){var e\75void 0!\75c?c:(new Date).getTime();this.t[a]\75[e,d];if(void 0\75\75c)try{b.console.timeStamp(\42CSI/\42+a)}catch(h){}};this[k](\42start\42,null,a)}var a;b.performance\46\46(a\75b.performance.timing);var n\75a?new d(a.responseStart):new d;b.jstiming\75{Timer:d,load:n};if(a){var c\75a.navigationStart,h\75a.responseStart;0\74c\46\46h\76\75c\46\46(b[g].srt\75h-c)}if(a){var e\75b[g].load;0\74c\46\46h\76\75c\46\46(e[k](\42_wtsrt\42,void 0,c),e[k](\42wtsrt_\42,\42_wtsrt\42,h),e[k](\42tbsd_\42,\42wtsrt_\42))}try{a\75null,\nb[f]\46\46b[f].csi\46\46(a\75Math.floor(b[f].csi().pageT),e\46\0460\74c\46\46(e[k](\42_tbnd\42,void 0,b[f].csi().startE),e[k](\42tbnd_\42,\42_tbnd\42,c))),null\75\75a\46\46b.gtbExternal\46\46(a\75b.gtbExternal.pageT()),null\75\75a\46\46b.external\46\46(a\75b.external.pageT,e\46\0460\74c\46\46(e[k](\42_tbnd\42,void 0,b.external.startE),e[k](\42tbnd_\42,\42_tbnd\42,c))),a\46\46(b[g].pt\75a)}catch(p){}})();b.tickAboveFold\75function(d){var a\0750;if(d.offsetParent){do a+\75d.offsetTop;while(d\75d.offsetParent)}d\75a;750\76\75d\46\46b[g].load[k](\42aft\42)};var l\75!1;function m(){l||(l\75!0,b[g].load[k](\42firstScrollTime\42))}b.addEventListener?b.addEventListener(\42scroll\42,m,!1):b.attachEvent(\42onscroll\42,m);\n })();\74/script\076', 'mobileHeadScript': '', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/76f25a6f2e06af76', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sf': 'n', 'tf': ''}}, {'name': 'skin', 'data': {'vars': {}, 'override': ''}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '/?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '/?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '/?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '/?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '/?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '/?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '/?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML4', 'wpzoom-feature-posts-3', null, document.getElementById('HTML4'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_ImageView', new _WidgetInfo('Image1', 'wpzoom-feature-posts-3', null, document.getElementById('Image1'), {'resize': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML3', 'wpzoom-feature-posts-3', null, document.getElementById('HTML3'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML2', 'wpzoom-feature-posts-3', null, document.getElementById('HTML2'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML7', 'wpzoom-feature-posts-3', null, document.getElementById('HTML7'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'wpzoom-feature-posts-3', null, document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/312777390-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/3904812905-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header1', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'header1', null, document.getElementById('Attribution1'), {'attribution': 'Powered by \74a href\75\47http://www.blogger.com\47 target\75\47_blank\47\76Blogger\74/a\76.'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'null', null, document.getElementById('PageList1'), {'title': 'Pages', 'links': [{'href': 'http://www.rpiblog.com/', 'title': 'Home', 'isCurrentPage': false}, {'href': 'http://www.rpiblog.com/p/contact-us.html', 'title': 'Contact Us', 'isCurrentPage': false}, {'href': 'http://www.rpiblog.com/p/about.html', 'title': 'About', 'isCurrentPage': false}, {'href': 'http://www.rpiblog.com/p/privacy-policy.html', 'title': 'Privacy Policy', 'isCurrentPage': false}, {'href': 'http://www.rpiblog.com/p/disclaimer.html', 'title': 'Disclaimer', 'isCurrentPage': false}, {'href': 'http://www.rpiblog.com/p/sponsored-article.html', 'title': 'Sponsored Article', 'isCurrentPage': false}], 'mobile': false}, 'displayModeFull'));
+</script>
+
+</body></html>
